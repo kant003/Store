@@ -8,7 +8,7 @@ public class Client {
 	String email;
 	String address;
 	String password;
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -85,7 +85,5 @@ public class Client {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 }
