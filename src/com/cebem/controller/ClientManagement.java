@@ -11,7 +11,6 @@ import com.cebem.model.Client;
 public class ClientManagement {
 
 	
-	
 	public int addDB(Client c){
 		// Setting parameters for the connection
         Connection connection = null;
