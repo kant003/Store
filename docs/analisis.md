@@ -81,7 +81,7 @@ Necesitaremos una interfaz gráfica (GUI) que permita listar y gestionar (añadi
 
 El aspecto sería este. Veamos la primera parte de la interface:
 
-![Alt DiagramaER](/references/img/gui-mockup-00.png)
+![Alt DiagramaER](/docs/img/gui-mockup-00.png)
 
 Desde ella, se podrán ver todos los clientes guardados, se podrán borrar, editar y añadir nuevos clientes, así como refrescar los datos y realizar filtrados.
 
@@ -94,7 +94,7 @@ En este caso será un *jDialog* que contendrá en su interior *jLabels* y *jText
 
 Y 2 botones para guardar/actualizar y cancelar.
 
-![Alt DiagramaER](/references/img/gui-mockup-01.png)
+![Alt DiagramaER](/docs/img/gui-mockup-01.png)
 
 Lo mismo para los proveedores y con los productos.
 
