@@ -98,6 +98,8 @@ Y 2 botones para guardar/actualizar y cancelar.
 
 Lo mismo para los proveedores y con los productos.
 
+# Controlador
+
 **Se necesita crear el controlador de acceso a datos (para clientes, proveedores y productos)**
 
 Este controlador consistirá en una clase con los siguientes métodos:
@@ -110,7 +112,7 @@ Admitirá como parámetro el texto a buscar.
 
 Lanzará una SQLException en caso de algún problema
 
-**selectSingleDB**
+## `selectSingleDB`
 
 Se encarga de buscar un cliente dado su ID
 
@@ -120,7 +122,7 @@ Devolverá un objeto de tipo cliente
 
 Lanzará una SQLException en caso de algún problema
 
-**selectAllDB**
+## `selectAllDB`
 
 Se encarga de obtener todos los clientes de la base de datos
 
@@ -130,7 +132,7 @@ No necesita parámetros
 
 Lanzará una SQLException en caso de algún problema
 
-**deleteDB**
+## `deleteDB`
 
 Se encarga de borrar un cliente dado su ID
 
@@ -142,7 +144,7 @@ Admitirá como parámetro:
 
 Lanzará una SQLException en caso de algún problema
 
-**updateDB**
+## `updateDB`
 
 Se encarga de actualizar los datos de un cliente dado
 
@@ -156,7 +158,7 @@ Un objeto de tipo cliente con los datos nuevos
 
 Lanzará una SQLException en caso de algún problema
 
-**addDB**
+## `addDB`
 
 Se encarga de añadir un cliente a la base de datos
 
@@ -167,20 +169,20 @@ Admitirá como parámetro un objeto de tipo cliente con los datos a insertar
 Lanzará una SQLException en caso de algún problema
 
 
-**getConnectionDB**
+## `getConnectionDB`
 
 Se encarga de devolver una conexión con la base de datos
 
 Devolverá un objeto de tipo connection
 
 
-**closeConnectionDB**
+## `closeConnectionDB`
 
 Se encarga de cerrar una conexión de la base de datos        
 
-Admitirá como parámetro un objeto de tipo connection
+Admitirá como parámetro:
 
-Fase 2:  Desarrollo de la parte web
+  * `con` Object (Connection)
 
 ____
 
