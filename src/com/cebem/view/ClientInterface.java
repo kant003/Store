@@ -31,14 +31,14 @@ public class ClientInterface {
 
 	private static JFrame frame;
 	private static JTable table;
-	private JTextField txtId;
-	private JTextField txtName;
-	private JTextField txtSurnames;
-	private JTextField txtTelephone;
-	private JTextField txtEmail;
-	private JTextField txtAdress;
-	private JTextField txtSearch;
-	private JPasswordField txtPass;
+	private static JTextField txtId;
+	private static JTextField txtName;
+	private static JTextField txtSurnames;
+	private static JTextField txtTelephone;
+	private static JTextField txtEmail;
+	private static JTextField txtAdress;
+	private static JTextField txtSearch;
+	private static JPasswordField txtPass;
 
 	/**
 	 * Launch the application.
@@ -350,6 +350,19 @@ public class ClientInterface {
 	}
 
 	private static void saveClient() {
+		Client c = new Client();
+		c.setName(txtName.getText());
+		c.setSurname(txtSurnames.getText());
+		c.setTelephone(Long.parseLong(txtTelephone.getText()));
+		c.setEmail(txtEmail.getText());
+		c.setAddress(txtAdress.getText());
+		c.setPassword(String.valueOf(txtPass.getPassword()));
+		try {
+			ClientManagement.addClient(c);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientList");
 	}
