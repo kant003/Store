@@ -1,3 +1,5 @@
+package com.cebem.view;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
