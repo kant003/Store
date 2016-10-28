@@ -3,6 +3,7 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.TimeZone;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import com.cebem.model.Client;
 
 public class ClientManagement {
+
 	// Method for connecting to the DB
 	public static Connection getConnectionDB() throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
@@ -38,6 +40,58 @@ public class ClientManagement {
 		return con;
 	}
 
+	public int addDB2(Client c) throws SQLException{
+		// Setting parameters for the connection
+		Connection connection = null;
+		String user = "";
+		String password = "";
+		String url = "jdbc:mysql://localhost:3306/";
+
+		
+			// Code for loading the Driver from Mysql
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// Setting the connection
+			connection = DriverManager.getConnection(url, user, password);
+			System.err.println("Connection established");
+
+			// We create the sentence
+			String sql = "INSERT INTO Client VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+			// We create the PreparedStatement
+			PreparedStatement pstm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); // Para
+			// devolver
+			// la
+			// ID
+
+			// We insert the data recieved from the Client into the prepared
+			// statement
+			pstm.setInt(1, c.getId());
+
+			pstm.setString(2, c.getName());
+
+			pstm.setString(3, c.getSurname());
+
+			pstm.setLong(4, c.getTelephone());
+
+			pstm.setString(5, c.getEmail());
+
+			pstm.setString(6, c.getAddress());
+
+			pstm.setString(7, c.getPassword());
+		
+		return 1;
+	}
 	// Method for closing the connection to the DB
 	public static Connection closeConnectionDB(Connection con) throws SQLException {
 		con.close();
@@ -71,6 +125,7 @@ public class ClientManagement {
 			pstm.setString(5, c.getAddress());
 			pstm.setString(6, c.getPassword());
 
+
 			// We execute the sentence
 			int filas = pstm.executeUpdate();
 			System.out.println("Filas afectadas: " + filas);
@@ -81,8 +136,9 @@ public class ClientManagement {
 				return (int) llave;
 			}
 
-			con = closeConnectionDB(con);
-		} catch (SQLException sqle) {
+
+		con.close();
+		}  catch (SQLException sqle) {
 			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,5 +146,22 @@ public class ClientManagement {
 
 		return 0;
 	}
-	
+
+	public void selectSingleDB(int id) {
+
+		ArrayList<Client> arrayClients = new ArrayList<Client>();
+
+		for (Client e : arrayClients) {
+
+			if (e.equals(id)) {
+				boolean result = true;
+				System.out.println(e); // Esto deberia ir en la interfaz
+				// guiclient
+				break;
+
+			}
+		}
+
+	}
+
 }
