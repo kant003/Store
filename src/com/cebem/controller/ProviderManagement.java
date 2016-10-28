@@ -47,9 +47,9 @@ public class ProviderManagement{
 	
 	public void selectSingleDB(int id) {
 
-		ArrayList<Provider> arrayProducts = new ArrayList<Provider>();
+		ArrayList<Provider> arrayProviders = new ArrayList<Provider>();
 
-		for (Provider pv : arrayProducts) {
+		for (Provider pv : arrayProviders) {
 
 			if (pv.equals(id)) {
 				
