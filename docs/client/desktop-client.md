@@ -2,15 +2,34 @@
 
 ## ***Client***
 
-Attributes: `id`, `name`, `surname`, `telephone`,`email`, `address`, `password`.
+Propiedades:
+
+* `id` - Integer *(required)*
+* `name` - String *(required)*
+* `surname` - String
+* `telephone` - Integer
+* `email` - String
+* `address` - String
+* `password` - String
 
 ## ***Provider***
 
-Attributes: `id`, `name`, `email`, `address`.
+Propiedades:
+
+* `id` - Integer *(required)*
+* `name` - String *(required)*
+* `email` - String
+* `address` - String
 
 ## ***Product***
 
-Attributes: `id`, `name`, `ref`, `Price`, `idProvider`.
+Propiedades:
+
+* `id` - Integer *(required)*
+* `name` - String *(required)*
+* `ref` - String *(required)*
+* `Price` - Double *(required)*
+* `idProvider` - Integer
 
 _____
 
@@ -28,7 +47,7 @@ Necesitaremos una interfaz gráfica (GUI) que permita listar y gestionar (añadi
 
 El aspecto sería este. Veamos la primera parte de la interface:
 
-![Alt DiagramaER](/docs/img/gui-mockup-00.png)
+![Alt DiagramaER](/docs/client/img/gui-mockup-00.png)
 
 Desde ella, se podrán ver todos los clientes guardados, se podrán borrar, editar y añadir nuevos clientes, así como refrescar los datos y realizar filtrados.
 
@@ -41,7 +60,7 @@ En este caso será un *jDialog* que contendrá en su interior *jLabels* y *jText
 
 Y 2 botones para guardar/actualizar y cancelar.
 
-![Alt DiagramaER](/docs/img/gui-mockup-01.png)
+![Alt DiagramaER](/docs/client/img/gui-mockup-01.png)
 
 Lo mismo para los proveedores y con los productos. Se crearán GUIs de forma similar.
 ______
@@ -251,7 +270,7 @@ Se encarga de buscar un producto dado su ID.
 
 Devolverá un objeto de tipo Product.
 
-  * `id` (Integer) - Cliente a buscar.
+  * `id` (Integer) - Producto a buscar.
 
 Lanzará una SQLException en caso de algún problema.
 
