@@ -3,7 +3,11 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.TimeZone;
+
+import com.cebem.model.Product;
+import com.cebem.model.Provider;
 
 public class ProviderManagement{
 	// Method for connecting to the DB
@@ -38,5 +42,23 @@ public class ProviderManagement{
 	public static Connection closeConnectionDB(Connection con) throws SQLException {
 		con.close();
 		return con;
+	}
+	
+	
+	public void selectSingleDB(int id) {
+
+		ArrayList<Provider> arrayProducts = new ArrayList<Provider>();
+
+		for (Provider pv : arrayProducts) {
+
+			if (pv.equals(id)) {
+				
+				System.out.println(pv); // Esto deberia ir en la interfaz
+				// guiProvider
+			
+
+			}
+		}
+
 	}
 }
