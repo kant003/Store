@@ -18,6 +18,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JPasswordField;
 
 public class ClientInterface {
 
@@ -30,6 +33,7 @@ public class ClientInterface {
 	private JTextField txtEmail;
 	private JTextField txtAdress;
 	private JTextField txtSearch;
+	private JPasswordField txtPass;
 
 	/**
 	 * Launch the application.
@@ -84,6 +88,12 @@ public class ClientInterface {
 		panelSearch.add(lblSearch);
 		
 		txtSearch = new JTextField();
+		txtSearch.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				search();
+			}
+		});
 		txtSearch.setText("");
 		panelSearch.add(txtSearch);
 		txtSearch.setColumns(10);
@@ -153,9 +163,9 @@ public class ClientInterface {
 		panelFieldsClientEdit.add(lblId, gbc_lblId);
 		
 		txtId = new JTextField();
+		txtId.setEditable(false);
 		GridBagConstraints gbc_txtId = new GridBagConstraints();
 		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtId.anchor = GridBagConstraints.NORTH;
 		gbc_txtId.insets = new Insets(0, 0, 5, 0);
 		gbc_txtId.gridx = 1;
 		gbc_txtId.gridy = 0;
@@ -174,7 +184,6 @@ public class ClientInterface {
 		txtName = new JTextField();
 		GridBagConstraints gbc_txtName = new GridBagConstraints();
 		gbc_txtName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtName.anchor = GridBagConstraints.NORTH;
 		gbc_txtName.insets = new Insets(0, 0, 5, 0);
 		gbc_txtName.gridx = 1;
 		gbc_txtName.gridy = 1;
@@ -192,7 +201,6 @@ public class ClientInterface {
 		txtSurnames = new JTextField();
 		GridBagConstraints gbc_txtSurnames = new GridBagConstraints();
 		gbc_txtSurnames.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtSurnames.anchor = GridBagConstraints.NORTH;
 		gbc_txtSurnames.insets = new Insets(0, 0, 5, 0);
 		gbc_txtSurnames.gridx = 1;
 		gbc_txtSurnames.gridy = 2;
@@ -211,7 +219,6 @@ public class ClientInterface {
 		txtTelephone = new JTextField();
 		GridBagConstraints gbc_txtTelephone = new GridBagConstraints();
 		gbc_txtTelephone.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtTelephone.anchor = GridBagConstraints.NORTH;
 		gbc_txtTelephone.insets = new Insets(0, 0, 5, 0);
 		gbc_txtTelephone.gridx = 1;
 		gbc_txtTelephone.gridy = 3;
@@ -230,7 +237,6 @@ public class ClientInterface {
 		txtEmail = new JTextField();
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
 		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtEmail.anchor = GridBagConstraints.NORTH;
 		gbc_txtEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_txtEmail.gridx = 1;
 		gbc_txtEmail.gridy = 4;
@@ -249,12 +255,26 @@ public class ClientInterface {
 		txtAdress = new JTextField();
 		GridBagConstraints gbc_txtAdress = new GridBagConstraints();
 		gbc_txtAdress.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtAdress.anchor = GridBagConstraints.NORTH;
 		gbc_txtAdress.insets = new Insets(0, 0, 5, 0);
 		gbc_txtAdress.gridx = 1;
 		gbc_txtAdress.gridy = 5;
 		panelFieldsClientEdit.add(txtAdress, gbc_txtAdress);
 		txtAdress.setColumns(10);
+		
+		JLabel lblPass = new JLabel("Contrase\u00F1a");
+		GridBagConstraints gbc_lblPass = new GridBagConstraints();
+		gbc_lblPass.anchor = GridBagConstraints.EAST;
+		gbc_lblPass.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPass.gridx = 0;
+		gbc_lblPass.gridy = 6;
+		panelFieldsClientEdit.add(lblPass, gbc_lblPass);
+		
+		txtPass = new JPasswordField();
+		GridBagConstraints gbc_txtPass = new GridBagConstraints();
+		gbc_txtPass.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPass.gridx = 1;
+		gbc_txtPass.gridy = 6;
+		panelFieldsClientEdit.add(txtPass, gbc_txtPass);
 		
 		JPanel panelTitleClientEdit = new JPanel();
 		panelClientEdit.add(panelTitleClientEdit, BorderLayout.NORTH);
@@ -313,5 +333,9 @@ public class ClientInterface {
 	private static void cancelSave(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientList");
+	}
+	
+	private static void search(){
+		
 	}
 }
