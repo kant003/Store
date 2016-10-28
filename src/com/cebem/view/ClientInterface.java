@@ -320,7 +320,9 @@ public class ClientInterface {
 	}
 
 	private static void deleteClient() {
-
+		int row = table.getSelectedRow();
+		int id = Integer.parseInt(table.getValueAt(row, 0).toString());
+		ClientManagement.deleteClient(id);
 	}
 
 	private static void editClient() {

@@ -108,8 +108,8 @@ public class ClientManagement {
 			
 			while (rs.next()) {
                 Client c = new Client();
-                /*Retrieve one employee details 
-                and store it in employee object*/
+                /*Retrieve one client details 
+                and store it in client object*/
                 c.setId(rs.getInt(1));
                 c.setName(rs.getString(2));
                 c.setSurname(rs.getString(3));
@@ -117,7 +117,7 @@ public class ClientManagement {
                 c.setEmail(rs.getString(5));
                 c.setAddress(rs.getString(6));
                 c.setPassword(rs.getString(7));
-                //add each employee to the list
+                //add each client to the list
                 clients.add(c);
             }
 		} catch (SQLException e) {
@@ -126,5 +126,26 @@ public class ClientManagement {
 		}
 		
 		return clients;
+	}
+	
+	// Method for deleting a client
+	public static void deleteClient(int id){
+	    Connection con = null;
+	    PreparedStatement st = null;
+		try {
+			con = getConnectionDB();
+			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			con = closeConnectionDB(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
