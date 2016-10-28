@@ -3,6 +3,8 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.TimeZone;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +47,7 @@ public class ClientManagement {
 	}
 
 	// Method for adding clients to the DB
-	public static int addDB(Client c) throws ClassNotFoundException {
+	public static int addClient(Client c) throws ClassNotFoundException {
 		Connection con = null;
 		try {
 			con = getConnectionDB();
@@ -91,4 +93,38 @@ public class ClientManagement {
 		return 0;
 	}
 	
+	// Method for getting the clients from the DB
+	public static ArrayList<Client> getClients(){
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		Connection con = null;
+		String query = "SELECT * FROM Client";
+        ResultSet rs = null;
+		try {
+			con = getConnectionDB();
+			
+			Statement statement = con.createStatement();
+			rs = statement.executeQuery(query);
+			
+			while (rs.next()) {
+                Client c = new Client();
+                /*Retrieve one employee details 
+                and store it in employee object*/
+                c.setId(rs.getInt(1));
+                c.setName(rs.getString(2));
+                c.setSurname(rs.getString(3));
+                c.setTelephone(rs.getLong(4));
+                c.setEmail(rs.getString(5));
+                c.setAddress(rs.getString(6));
+                c.setPassword(rs.getString(7));
+                //add each employee to the list
+                clients.add(c);
+            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return clients;
+	}
 }
