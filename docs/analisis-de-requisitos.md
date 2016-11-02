@@ -59,44 +59,22 @@ ____
 # Fase 1
 ## Desarrollo de la parte backend
 
-* [ ] Crear la estructura de la base de datos en función del diagrama entidad relación especificado.
+* [ ] Crear la estructura de la **base de datos** en función del diagrama entidad relación especificado anteriormente.
 
-* [ ] También se necesita crear un usuario llamado store con password Ad1234 y permisos adecuados sobre el esquema creado en el punto anterior.
+* [ ] También se necesita crear un usuario llamado **store** con password **Ad1234** y permisos adecuados sobre el esquema creado en el punto anterior.
 
 * [ ] Crear 3 modelos
 
-* [ ] Un modelo para el cliente que llamaremos client cuyos campos serán id, name, surname, telephone, email, address, password.
+* [x] Un modelo para el cliente que llamaremos **Client** cuyos campos serán `id`, `name`, `surname`, `telephone`,`email`, `address`, `password`.
 
-* [ ] Un modelo para el proveedor llamado provider cuyos campos serán:
+* [x] Un modelo para el proveedor llamado **Provider** cuyos campos serán:
 `id`, `name`, `email`, `address`
 
-* [ ] Un modelo para el producto llamado product cuyos campos serán:
+* [ ] Un modelo para el producto llamado **Product** cuyos campos serán:
 `id`, `name`, `ref`, `Price`, `idProvider`
 
 * [ ] Crear las interfaces gráficas para cada uno de los módulos. (clientes, proveedores, productos).
 
-**Ejemplo para el cliente desktop**
-
-Necesitaremos una interfaz gráfica (GUI) que permita listar y gestionar (añadir, borrar o modificar o CRUD) los clientes de la empresa. Esta interfaz se podrá diseñar con un *CardLayout* (con 2 *jPanel* en su interior).
-
-El aspecto sería este. Veamos la primera parte de la interface:
-
-![Alt DiagramaER](/docs/img/gui-mockup-00.png)
-
-Desde ella, se podrán ver todos los clientes guardados, se podrán borrar, editar y añadir nuevos clientes, así como refrescar los datos y realizar filtrados.
-
-El interface estará compuesta por un *JFrame* principal en cuyo interior habrá un *jTable* (de nombre tableClientes) en el centro y 4 botones en la parte inferior.(**buttonDelete**, **buttonUpdate**, **buttonAdd** y **buttonRefresh**).
-
-En la parte superior un label con el titulo de la ventana y una zona para que se pueden filtrar los datos a modo de búsqueda txtFilter.
-
-Necesitaremos crear otro *jPanel* con un formulario para poder editar y añadir nuevos clientes.
-En este caso será un *jDialog* que contendrá en su interior *jLabels* y *jTextBox* (**txtName**, **txtSurnames**, **txtTelephone**, **txtEmail**, **txtAddress**).
-
-Y 2 botones para guardar/actualizar y cancelar.
-
-![Alt DiagramaER](/docs/img/gui-mockup-01.png)
-
-Lo mismo para los proveedores y con los productos.
 
 # Controlador
 
@@ -104,9 +82,11 @@ Lo mismo para los proveedores y con los productos.
 
 Este controlador consistirá en una clase con los siguientes métodos:
 
-**findClientsDB**, y se encargará de buscar clientes en la base de datos.
+## `findClientsDB`
 
-Devolverá un array de (por ejemplo) clientes
+Se encargará de buscar clientes en la base de datos.
+
+Devolverá un ArrayListclientes
 
 Admitirá como parámetro el texto a buscar.
 
