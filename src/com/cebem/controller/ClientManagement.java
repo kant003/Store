@@ -158,11 +158,55 @@ public class ClientManagement {
 				System.out.println(e); // Esto deberia ir en la interfaz
 				// guiclient
 			
+<<<<<<< HEAD
 
 			}
+=======
+			while (rs.next()) {
+                Client c = new Client();
+                /*Retrieve one client details 
+                and store it in client object*/
+                c.setId(rs.getInt(1));
+                c.setName(rs.getString(2));
+                c.setSurname(rs.getString(3));
+                c.setTelephone(rs.getLong(4));
+                c.setEmail(rs.getString(5));
+                c.setAddress(rs.getString(6));
+                c.setPassword(rs.getString(7));
+                //add each client to the list
+                clients.add(c);
+            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+>>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 		}
 
 	}
+<<<<<<< HEAD
 
 
+=======
+	
+	// Method for deleting a client
+	public static void deleteClient(int id){
+	    Connection con = null;
+	    PreparedStatement st = null;
+		try {
+			con = getConnectionDB();
+			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			con = closeConnectionDB(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+>>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 }

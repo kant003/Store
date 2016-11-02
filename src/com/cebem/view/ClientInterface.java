@@ -312,9 +312,17 @@ public class ClientInterface {
 		});
 		panelButtonsClientEdit.add(buttonCancel);
 	}
+<<<<<<< HEAD
 	
 	private static void deleteClient(){
 	
+=======
+
+	private static void deleteClient() {
+		int row = table.getSelectedRow();
+		int id = Integer.parseInt(table.getValueAt(row, 0).toString());
+		ClientManagement.deleteClient(id);
+>>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 	}
 	
 	private static void editClient(){
