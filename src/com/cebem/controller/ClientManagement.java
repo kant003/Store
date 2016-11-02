@@ -31,11 +31,7 @@ public class ClientManagement {
 			Class.forName(sDriver).newInstance();
 			// The connection is established
 			con = DriverManager.getConnection(sURL, user, pass);
-<<<<<<< HEAD
 			// System.err.println("Conexiï¿½n establecida");
-=======
-			// System.err.println("Conexión establecida");
->>>>>>> 50eff4ada7dcae156314c38d5a24181c77f95bbf
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException mte) {
 			mte.printStackTrace();
 			throw new SQLException(mte.getMessage());
