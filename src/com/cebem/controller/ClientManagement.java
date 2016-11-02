@@ -3,10 +3,7 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
 import java.sql.Statement;
->>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 import java.util.ArrayList;
 import java.util.TimeZone;
 import java.sql.PreparedStatement;
@@ -32,7 +29,7 @@ public class ClientManagement {
 			Class.forName(sDriver).newInstance();
 			// The connection is established
 			con = DriverManager.getConnection(sURL, user, pass);
-			System.err.println("Conexión establecida");
+			System.err.println("Conexiï¿½n establecida");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException mte) {
 			mte.printStackTrace();
 			throw new SQLException(mte.getMessage());
@@ -51,7 +48,7 @@ public class ClientManagement {
 		String password = "";
 		String url = "jdbc:mysql://localhost:3306/";
 
-		
+
 			// Code for loading the Driver from Mysql
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -93,7 +90,7 @@ public class ClientManagement {
 			pstm.setString(6, c.getAddress());
 
 			pstm.setString(7, c.getPassword());
-		
+
 		return 1;
 	}
 	// Method for closing the connection to the DB
@@ -150,7 +147,6 @@ public class ClientManagement {
 
 		return 0;
 	}
-<<<<<<< HEAD
 
 	public void selectSingleDB(int id) {
 
@@ -166,27 +162,25 @@ public class ClientManagement {
 
 			}
 		}
-
 	}
 
-=======
-	
+
 	// Method for getting the clients from the DB
 	public static ArrayList<Client> getClients(){
 		ArrayList<Client> clients = new ArrayList<Client>();
-		
+
 		Connection con = null;
 		String query = "SELECT * FROM Client";
         ResultSet rs = null;
 		try {
 			con = getConnectionDB();
-			
+
 			Statement statement = con.createStatement();
 			rs = statement.executeQuery(query);
-			
+
 			while (rs.next()) {
                 Client c = new Client();
-                /*Retrieve one client details 
+                /*Retrieve one client details
                 and store it in client object*/
                 c.setId(rs.getInt(1));
                 c.setName(rs.getString(2));
@@ -202,10 +196,10 @@ public class ClientManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return clients;
 	}
-	
+
 	// Method for deleting a client
 	public static void deleteClient(int id){
 	    Connection con = null;
@@ -226,5 +220,4 @@ public class ClientManagement {
 			e.printStackTrace();
 		}
 	}
->>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 }
