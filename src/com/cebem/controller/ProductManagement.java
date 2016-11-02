@@ -55,11 +55,7 @@ public class ProductManagement {
 				/*
 				 * Retrieve one client details and store it in client object
 				 */
-				int id;
-				String name;
-				int ref;
-				double price;
-				int idProvider;
+			
 				p.setId(rs.getInt(1));
 				p.setName(rs.getString(2));
 				p.setRef(rs.getInt(3));
@@ -76,19 +72,7 @@ public class ProductManagement {
 	}
 
 	
-	public void selectSingleDB(int id) {
-
-		ArrayList<Product> arrayProducts = new ArrayList<Product>();
-
-		for (Product p : arrayProducts) {
-
-			if (p.equals(id)) {
-				
-				System.out.println(p); // Esto deberia ir en la interfaz
-				// guiProduct
-			
-
-			}
+	
 		}
 
 	}
