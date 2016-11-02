@@ -14,8 +14,9 @@ import com.cebem.model.Client;
 public class ClientManagement {
 
 	static Connection con = null;
+
 	// Method for connecting to the DB
-	public static Connection getConnectionDB() throws SQLException {
+	public static void openConnectionDB() throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
 		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
@@ -23,14 +24,14 @@ public class ClientManagement {
 		String pass = "Ad123";// Pass
 		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
-		Connection con = null;
+		con = null;
 
 		try {
 			// Method for loading the DB driver
 			Class.forName(sDriver).newInstance();
 			// The connection is established
 			con = DriverManager.getConnection(sURL, user, pass);
-			//System.err.println("Conexión establecida");
+			// System.err.println("Conexión establecida");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException mte) {
 			mte.printStackTrace();
 			throw new SQLException(mte.getMessage());
@@ -38,39 +39,8 @@ public class ClientManagement {
 			e.printStackTrace();
 			throw new SQLException(e.getMessage());
 		}
-
-		return con;
 	}
 
-	public int addDB2(Client c) throws SQLException{
-			// We create the sentence
-			String sql = "INSERT INTO Client VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-			// We create the PreparedStatement
-			PreparedStatement pstm = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); // Para
-			// devolver
-			// la
-			// ID
-
-			// We insert the data recieved from the Client into the prepared
-			// statement
-			pstm.setInt(1, c.getId());
-
-			pstm.setString(2, c.getName());
-
-			pstm.setString(3, c.getSurname());
-
-			pstm.setLong(4, c.getTelephone());
-
-			pstm.setString(5, c.getEmail());
-
-			pstm.setString(6, c.getAddress());
-
-			pstm.setString(7, c.getPassword());
-		
-			int totalInserciones = pstm.executeUpdate();
-		return totalInserciones;
-	}
 	// Method for closing the connection to the DB
 	public static Connection closeConnectionDB(Connection con) throws SQLException {
 		con.close();
@@ -78,8 +48,7 @@ public class ClientManagement {
 	}
 
 	// Method for adding clients to the DB
-	public static int addDB(Client c) throws ClassNotFoundException {
-		
+	public static int addClient(Client c) throws ClassNotFoundException {
 
 		try {
 			// We create the sentence
@@ -98,10 +67,8 @@ public class ClientManagement {
 			pstm.setString(5, c.getAddress());
 			pstm.setString(6, c.getPassword());
 
-
 			// We execute the sentence
-			int filas = pstm.executeUpdate();
-			//System.out.println("Filas afectadas: " + filas);
+			pstm.executeUpdate();
 
 			ResultSet rs = pstm.getGeneratedKeys();
 			if (rs != null && rs.next()) {
@@ -109,9 +76,7 @@ public class ClientManagement {
 				return (int) llave;
 			}
 
-
-		
-		}  catch (SQLException sqle) {
+		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,27 +85,24 @@ public class ClientManagement {
 		return 0;
 	}
 
-
-	public Client selectSingleDB(int id) throws SQLException{
+	public Client getSingleClient(int id) throws SQLException {
 		Client c = new Client();
-		ArrayList<Client> arrayClients = new ArrayList<Client>();
 		try {
-		String query = "SELECT * FROM Client WHERE id = ?";
-		PreparedStatement pstm = con.prepareStatement(query);
-		ResultSet rs = pstm.executeQuery();
-		
-		
-			while(rs.next()){
-				
-			    /*Retrieve one client details 
-			    and store it in client object*/
-			    c.setId(rs.getInt(1));
-			    c.setName(rs.getString(2));
-			    c.setSurname(rs.getString(3));
-			    c.setTelephone(rs.getLong(4));
-			    c.setEmail(rs.getString(5));
-			    c.setAddress(rs.getString(6));
-			    c.setPassword(rs.getString(7));
+			String query = "SELECT * FROM Client WHERE id = ?";
+			PreparedStatement pstm = con.prepareStatement(query);
+			ResultSet rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				/*
+				 * Retrieve one client details and store it in client object
+				 */
+				c.setId(rs.getInt(1));
+				c.setName(rs.getString(2));
+				c.setSurname(rs.getString(3));
+				c.setTelephone(rs.getLong(4));
+				c.setEmail(rs.getString(5));
+				c.setAddress(rs.getString(6));
+				c.setPassword(rs.getString(7));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -148,37 +110,34 @@ public class ClientManagement {
 			throw new SQLException();
 		}
 		return c;
-
 	}
 
-
-	
 	// Method for getting the clients from the DB
-	public static ArrayList<Client> getClients(){
+	public static ArrayList<Client> getClients() {
 		ArrayList<Client> clients = new ArrayList<Client>();
-	
+
 		String query = "SELECT * FROM Client";
-        ResultSet rs = null;
+		ResultSet rs = null;
 		try {
-			
+
 			Statement statement = con.createStatement();
 			rs = statement.executeQuery(query);
-			
 
 			while (rs.next()) {
-                Client c = new Client();
-                /*Retrieve one client details 
-                and store it in client object*/
-                c.setId(rs.getInt(1));
-                c.setName(rs.getString(2));
-                c.setSurname(rs.getString(3));
-                c.setTelephone(rs.getLong(4));
-                c.setEmail(rs.getString(5));
-                c.setAddress(rs.getString(6));
-                c.setPassword(rs.getString(7));
-                //add each client to the list
-                clients.add(c);
-            }
+				Client c = new Client();
+				/*
+				 * Retrieve one client details and store it in client object
+				 */
+				c.setId(rs.getInt(1));
+				c.setName(rs.getString(2));
+				c.setSurname(rs.getString(3));
+				c.setTelephone(rs.getLong(4));
+				c.setEmail(rs.getString(5));
+				c.setAddress(rs.getString(6));
+				c.setPassword(rs.getString(7));
+				// add each client to the list
+				clients.add(c);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -187,16 +146,11 @@ public class ClientManagement {
 		return clients;
 	}
 
-
-
-
-	
 	// Method for deleting a client
-	public static void deleteClient(int id){
-	    
-	    PreparedStatement st = null;
+	public static void deleteClient(int id) {
+
+		PreparedStatement st = null;
 		try {
-			
 			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
 			st.setInt(1, id);
 			st.executeUpdate();
@@ -204,7 +158,5 @@ public class ClientManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	   
 	}
-
 }
