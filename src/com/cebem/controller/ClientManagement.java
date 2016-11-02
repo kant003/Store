@@ -3,6 +3,7 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -11,13 +12,15 @@ import com.cebem.model.Client;
 
 public class ClientManagement{
 	
+	public static Connection con=null;
+	
 	public static Connection getConnectionDB() throws SQLException{
 		//Creamos la conexión con la base
 		String sURL="jdbc:mysql://10.100.13.110/store_development?useSSL=false";
 		String user="Store";//Con el usuario
 		String pass="Ad123";//Su contraseña
 		String sDriver="com.mysql.jdbc.Driver";//Es necesario el conector correspondiente, en este caso el mysql-connector-java-5.1.39
-		Connection con=null;
+		
 		
 		try{
 			Class.forName(sDriver).newInstance();
@@ -88,6 +91,37 @@ public class ClientManagement{
         }
 		
 		return 0;
+	}
+	
+	public ArrayList<Client> findClientsDB(String param){
+		//el array a devolver con los clientes
+		ArrayList<Client> arrCli=null;
+		//El Preparedstatement para...que haga su trabajo
+		PreparedStatement pstm=null;
+		//Resultset para recoger los objetos Client que devuelva
+		ResultSet result=null;
+		
+		try{           
+			String query = "SELECT Client.id,name,surname,telephone,email,address,password"
+                    + " FROM Client WHERE Client.name like '%"+param+"%' Or Client.surname like '%"+param
+                    + "%' Or Client.telephone like '%"+param+"%' Or Client.email like '%"+param
+                    + "%' Or Client.address like '%"+param+"%';";
+
+           pstm = con.prepareStatement(query);
+           result = pstm.executeQuery();
+            
+           //Recorremos el resultado, guardadno los resultados en el arrCli
+           while(result.next()){
+               System.out.println(result.getString("Nombre") +"\t"+
+               result.getDate("fechaAlta") +"\t" +result.getDouble("Salario") +"\t"+
+               result.getDouble("Comision") +"\t" +result.getString("DepNombre") +"\t"+
+               result.getString("Localidad"));
+                
+           }// fin while
+        
+        }catch(SQLException sqle){sqle.printStackTrace();}
+
+		return arrCli;
 	}
 	
 }
