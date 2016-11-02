@@ -11,7 +11,7 @@ import com.cebem.model.Provider;
 
 public class ProviderManagement extends DBManagement {
 
-	public void selectSingleDB(int id) {
+	public void getSingleProvider(int id) {
 
 		ArrayList<Provider> arrayProviders = new ArrayList<Provider>();
 
@@ -22,12 +22,10 @@ public class ProviderManagement extends DBManagement {
 				System.out.println(pv); // Esto deberia ir en la interfaz
 				// guiProvider
 
-
 				pv.setId(rs.getInt(1));
 				pv.setName(rs.getString(2));
 				pv.setAddress(rs.getString(3));
 				pv.setEmail(rs.getString(4));
-
 
 			}
 		}
@@ -63,7 +61,4 @@ public class ProviderManagement extends DBManagement {
 		}
 		return providers;
 	}
-
-
-}
 }

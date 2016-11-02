@@ -1,5 +1,10 @@
 package com.cebem.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.TimeZone;
+
 public class DBManagement {
 	static Connection con = null;
 
@@ -28,8 +33,8 @@ public class DBManagement {
 	}
 
 	// Method for closing the connection to the DB
-	public static Connection closeConnectionDB(Connection con) throws SQLException {
+	public static void closeConnectionDB() throws SQLException {
 		con.close();
-		return con;
+		con = null;
 	}
 }

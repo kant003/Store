@@ -19,7 +19,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class ProductosGUI {
+public class ProductInterface {
 
 	private JFrame frame;
 	private JTextField textSearch;
@@ -37,7 +37,7 @@ public class ProductosGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProductosGUI window = new ProductosGUI();
+					ProductInterface window = new ProductInterface();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class ProductosGUI {
 	/**
 	 * Create the application.
 	 */
-	public ProductosGUI() {
+	public ProductInterface() {
 		initialize();
 	}
 
