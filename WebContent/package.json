@@ -4,8 +4,8 @@
   "description": "Site for the Store",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "surge --domain cebem-store.surge.sh",
+    "local": "webpack ./entry.js bundle.js && node server.js",
+    "deploy": "webpack ./entry.js bundle.js && surge --domain cebem-store.surge.sh &&",
     "build": "webpack ./entry.js bundle.js"
   },
   "author": "Ivan Nieto",
