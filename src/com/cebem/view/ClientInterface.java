@@ -1,32 +1,28 @@
 package com.cebem.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.awt.BorderLayout;	
 import java.awt.CardLayout;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import com.cebem.model.Client;
-import com.cebem.model.Provider;
-
-import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
-import java.awt.Font;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import com.cebem.controller.ClientManagement;
 
 public class ClientInterface {
 
@@ -312,44 +308,39 @@ public class ClientInterface {
 		});
 		panelButtonsClientEdit.add(buttonCancel);
 	}
-<<<<<<< HEAD
-	
-	private static void deleteClient(){
-	
-=======
 
-	private static void deleteClient() {
+
+	private void deleteClient() {
 		int row = table.getSelectedRow();
 		int id = Integer.parseInt(table.getValueAt(row, 0).toString());
 		ClientManagement.deleteClient(id);
->>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 	}
 	
-	private static void editClient(){
+	private void editClient(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientEdit");
 	}
 	
-	private static void addClient(){
+	private void addClient(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientEdit");
 	}
 	
-	private static void refresh(){
+	private void refresh(){
 		
 	}
 	
-	private static void saveClient(){
+	private void saveClient(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientList");
 	}
 	
-	private static void cancelSave(){
+	private void cancelSave(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientList");
 	}
 	
-	private static void search(){
+	private void search(){
 		
 	}
 }
