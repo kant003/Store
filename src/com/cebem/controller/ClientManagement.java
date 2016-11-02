@@ -16,12 +16,10 @@ public class ClientManagement {
 	static Connection con = null;
 
 	// Method for connecting to the DB
-	public static void openConnectionDB() throws SQLException {
+	public static void openConnectionDB(String user, String pass) throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
 		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
-		String user = "Store";// User
-		String pass = "Ad123";// Pass
 		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
 		con = null;
@@ -148,7 +146,6 @@ public class ClientManagement {
 
 	// Method for deleting a client
 	public static void deleteClient(int id) {
-
 		PreparedStatement st = null;
 		try {
 			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
@@ -158,5 +155,33 @@ public class ClientManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Client> findClientsDB(String param){
+		//The array for return the clients
+		ArrayList<Client> arrCli=null;
+		PreparedStatement pstm=null;
+		ResultSet result=null;
+		
+		try{           
+			String query = "SELECT Client.id,name,surname,telephone,email,address,password"
+                    + " FROM Client WHERE Client.name like '%"+param+"%' Or Client.surname like '%"+param
+                    + "%' Or Client.telephone like '%"+param+"%' Or Client.email like '%"+param
+                    + "%' Or Client.address like '%"+param+"%';";
+
+           pstm = con.prepareStatement(query);
+           result = pstm.executeQuery();
+            
+           //Recorremos el resultado, guardadno los resultados en el arrCli
+           while(result.next()){
+               System.out.println(result.getString("Nombre") +"\t"+
+               result.getDate("fechaAlta") +"\t" +result.getDouble("Salario") +"\t"+
+               result.getDouble("Comision") +"\t" +result.getString("DepNombre") +"\t"+
+               result.getString("Localidad"));   
+           }
+        
+        }catch(SQLException sqle){sqle.printStackTrace();}
+
+		return arrCli;
 	}
 }
