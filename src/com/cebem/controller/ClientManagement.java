@@ -16,7 +16,7 @@ public class ClientManagement {
 	static Connection con = null;
 
 	// Method for connecting to the DB
-	public static void getConnectionDB() throws SQLException {
+	public static void openConnectionDB() throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
 		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
