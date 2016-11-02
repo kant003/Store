@@ -3,6 +3,10 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+<<<<<<< HEAD
+=======
+import java.sql.Statement;
+>>>>>>> origin/master
 import java.util.ArrayList;
 import java.util.TimeZone;
 import java.sql.PreparedStatement;
@@ -99,7 +103,7 @@ public class ClientManagement {
 	}
 
 	// Method for adding clients to the DB
-	public static int addDB(Client c) throws ClassNotFoundException {
+	public static int addClient(Client c) throws ClassNotFoundException {
 		Connection con = null;
 		try {
 			con = getConnectionDB();
@@ -146,6 +150,7 @@ public class ClientManagement {
 
 		return 0;
 	}
+<<<<<<< HEAD
 
 	public void selectSingleDB(int id) {
 
@@ -164,4 +169,62 @@ public class ClientManagement {
 
 	}
 
+=======
+	
+	// Method for getting the clients from the DB
+	public static ArrayList<Client> getClients(){
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		Connection con = null;
+		String query = "SELECT * FROM Client";
+        ResultSet rs = null;
+		try {
+			con = getConnectionDB();
+			
+			Statement statement = con.createStatement();
+			rs = statement.executeQuery(query);
+			
+			while (rs.next()) {
+                Client c = new Client();
+                /*Retrieve one client details 
+                and store it in client object*/
+                c.setId(rs.getInt(1));
+                c.setName(rs.getString(2));
+                c.setSurname(rs.getString(3));
+                c.setTelephone(rs.getLong(4));
+                c.setEmail(rs.getString(5));
+                c.setAddress(rs.getString(6));
+                c.setPassword(rs.getString(7));
+                //add each client to the list
+                clients.add(c);
+            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return clients;
+	}
+	
+	// Method for deleting a client
+	public static void deleteClient(int id){
+	    Connection con = null;
+	    PreparedStatement st = null;
+		try {
+			con = getConnectionDB();
+			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			con = closeConnectionDB(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+>>>>>>> origin/master
 }
