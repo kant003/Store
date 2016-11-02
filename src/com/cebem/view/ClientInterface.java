@@ -9,6 +9,10 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.cebem.model.Client;
+import com.cebem.model.Provider;
+
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import java.awt.Font;
@@ -18,27 +22,24 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPasswordField;
-import javax.swing.table.DefaultTableModel;
-
-import com.cebem.controller.ClientManagement;
-import com.cebem.model.Client;
 
 public class ClientInterface {
 
 	private static JFrame frame;
-	private static JTable table;
-	private static JTextField txtId;
-	private static JTextField txtName;
-	private static JTextField txtSurnames;
-	private static JTextField txtTelephone;
-	private static JTextField txtEmail;
-	private static JTextField txtAdress;
-	private static JTextField txtSearch;
-	private static JPasswordField txtPass;
+	private JTable table;
+	private JTextField txtId;
+	private JTextField txtName;
+	private JTextField txtSurnames;
+	private JTextField txtTelephone;
+	private JTextField txtEmail;
+	private JTextField txtAdress;
+	private JTextField txtSearch;
+	private JPasswordField txtPass;
 
 	/**
 	 * Launch the application.
@@ -73,50 +74,43 @@ public class ClientInterface {
 		frame.setMinimumSize(frame.getSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
-
+		
 		JPanel panelClientList = new JPanel();
 		frame.getContentPane().add(panelClientList, "ClientList");
 		panelClientList.setLayout(new BorderLayout(0, 0));
-
+		
 		JPanel panelTitleClientList = new JPanel();
 		panelClientList.add(panelTitleClientList, BorderLayout.NORTH);
 		panelTitleClientList.setLayout(new BorderLayout(0, 0));
-
+		
 		JLabel lblClientList = new JLabel("Listado de clientes");
 		lblClientList.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panelTitleClientList.add(lblClientList, BorderLayout.WEST);
-
+		
 		JPanel panelSearch = new JPanel();
 		panelTitleClientList.add(panelSearch, BorderLayout.EAST);
-
+		
 		JLabel lblSearch = new JLabel("Buscar:");
 		panelSearch.add(lblSearch);
-
+		
 		txtSearch = new JTextField();
 		txtSearch.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) search();
+				search();
 			}
 		});
 		txtSearch.setText("");
 		panelSearch.add(txtSearch);
 		txtSearch.setColumns(10);
-
+		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Id", "Nombre", "Apellidos", "Teléfono", "Email", "Dirección", "Contraseña"
-			}
-		));
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelClientList.add(scrollPane, BorderLayout.CENTER);
-
+		
 		JPanel panelButtonsClientList = new JPanel();
 		panelClientList.add(panelButtonsClientList, BorderLayout.SOUTH);
-
+		 
 		JButton buttonDelete = new JButton("Borrar seleccionado");
 		buttonDelete.addMouseListener(new MouseAdapter() {
 			@Override
@@ -125,7 +119,7 @@ public class ClientInterface {
 			}
 		});
 		panelButtonsClientList.add(buttonDelete);
-
+		
 		JButton buttonEdit = new JButton("Editar seleccionado");
 		buttonEdit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -134,7 +128,7 @@ public class ClientInterface {
 			}
 		});
 		panelButtonsClientList.add(buttonEdit);
-
+		
 		JButton buttonAdd = new JButton("A\u00F1adir nuevo");
 		buttonAdd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -143,7 +137,7 @@ public class ClientInterface {
 			}
 		});
 		panelButtonsClientList.add(buttonAdd);
-
+		
 		JButton buttonRefresh = new JButton("Refrescar");
 		buttonRefresh.addMouseListener(new MouseAdapter() {
 			@Override
@@ -152,20 +146,20 @@ public class ClientInterface {
 			}
 		});
 		panelButtonsClientList.add(buttonRefresh);
-
+		
 		JPanel panelClientEdit = new JPanel();
 		frame.getContentPane().add(panelClientEdit, "ClientEdit");
 		panelClientEdit.setLayout(new BorderLayout(0, 0));
-
+		
 		JPanel panelFieldsClientEdit = new JPanel();
 		panelClientEdit.add(panelFieldsClientEdit, BorderLayout.CENTER);
 		GridBagLayout gbl_panelFieldsClientEdit = new GridBagLayout();
-		gbl_panelFieldsClientEdit.columnWidths = new int[] { 216, 86, 0 };
-		gbl_panelFieldsClientEdit.rowHeights = new int[] { 20, 20, 0, 0, 0, 0, 0, 0 };
-		gbl_panelFieldsClientEdit.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panelFieldsClientEdit.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panelFieldsClientEdit.columnWidths = new int[]{216, 86, 0};
+		gbl_panelFieldsClientEdit.rowHeights = new int[]{20, 20, 0, 0, 0, 0, 0, 0};
+		gbl_panelFieldsClientEdit.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelFieldsClientEdit.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelFieldsClientEdit.setLayout(gbl_panelFieldsClientEdit);
-
+		
 		JLabel lblId = new JLabel("Id");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
 		gbc_lblId.anchor = GridBagConstraints.EAST;
@@ -173,7 +167,7 @@ public class ClientInterface {
 		gbc_lblId.gridx = 0;
 		gbc_lblId.gridy = 0;
 		panelFieldsClientEdit.add(lblId, gbc_lblId);
-
+		
 		txtId = new JTextField();
 		txtId.setEditable(false);
 		GridBagConstraints gbc_txtId = new GridBagConstraints();
@@ -184,7 +178,7 @@ public class ClientInterface {
 		panelFieldsClientEdit.add(txtId, gbc_txtId);
 		txtId.setText("");
 		txtId.setColumns(10);
-
+		
 		JLabel lblName = new JLabel("Nombre");
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.EAST;
@@ -192,7 +186,7 @@ public class ClientInterface {
 		gbc_lblName.gridx = 0;
 		gbc_lblName.gridy = 1;
 		panelFieldsClientEdit.add(lblName, gbc_lblName);
-
+		
 		txtName = new JTextField();
 		GridBagConstraints gbc_txtName = new GridBagConstraints();
 		gbc_txtName.fill = GridBagConstraints.HORIZONTAL;
@@ -201,7 +195,7 @@ public class ClientInterface {
 		gbc_txtName.gridy = 1;
 		panelFieldsClientEdit.add(txtName, gbc_txtName);
 		txtName.setColumns(10);
-
+		
 		JLabel lblSurnames = new JLabel("Apellidos");
 		GridBagConstraints gbc_lblSurnames = new GridBagConstraints();
 		gbc_lblSurnames.anchor = GridBagConstraints.EAST;
@@ -209,7 +203,7 @@ public class ClientInterface {
 		gbc_lblSurnames.gridx = 0;
 		gbc_lblSurnames.gridy = 2;
 		panelFieldsClientEdit.add(lblSurnames, gbc_lblSurnames);
-
+		
 		txtSurnames = new JTextField();
 		GridBagConstraints gbc_txtSurnames = new GridBagConstraints();
 		gbc_txtSurnames.fill = GridBagConstraints.HORIZONTAL;
@@ -219,7 +213,7 @@ public class ClientInterface {
 		panelFieldsClientEdit.add(txtSurnames, gbc_txtSurnames);
 		txtSurnames.setText("");
 		txtSurnames.setColumns(10);
-
+		
 		JLabel lblTelephone = new JLabel("Tel\u00E9fono");
 		GridBagConstraints gbc_lblTelephone = new GridBagConstraints();
 		gbc_lblTelephone.anchor = GridBagConstraints.EAST;
@@ -227,7 +221,7 @@ public class ClientInterface {
 		gbc_lblTelephone.gridx = 0;
 		gbc_lblTelephone.gridy = 3;
 		panelFieldsClientEdit.add(lblTelephone, gbc_lblTelephone);
-
+		
 		txtTelephone = new JTextField();
 		GridBagConstraints gbc_txtTelephone = new GridBagConstraints();
 		gbc_txtTelephone.fill = GridBagConstraints.HORIZONTAL;
@@ -237,7 +231,7 @@ public class ClientInterface {
 		panelFieldsClientEdit.add(txtTelephone, gbc_txtTelephone);
 		txtTelephone.setText("");
 		txtTelephone.setColumns(10);
-
+		
 		JLabel lblEmail = new JLabel("Email");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
@@ -245,7 +239,7 @@ public class ClientInterface {
 		gbc_lblEmail.gridx = 0;
 		gbc_lblEmail.gridy = 4;
 		panelFieldsClientEdit.add(lblEmail, gbc_lblEmail);
-
+		
 		txtEmail = new JTextField();
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
 		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
@@ -255,7 +249,7 @@ public class ClientInterface {
 		panelFieldsClientEdit.add(txtEmail, gbc_txtEmail);
 		txtEmail.setText("");
 		txtEmail.setColumns(10);
-
+		
 		JLabel lblAdress = new JLabel("Direcci\u00F3n");
 		GridBagConstraints gbc_lblAdress = new GridBagConstraints();
 		gbc_lblAdress.anchor = GridBagConstraints.EAST;
@@ -263,7 +257,7 @@ public class ClientInterface {
 		gbc_lblAdress.gridx = 0;
 		gbc_lblAdress.gridy = 5;
 		panelFieldsClientEdit.add(lblAdress, gbc_lblAdress);
-
+		
 		txtAdress = new JTextField();
 		GridBagConstraints gbc_txtAdress = new GridBagConstraints();
 		gbc_txtAdress.fill = GridBagConstraints.HORIZONTAL;
@@ -272,7 +266,7 @@ public class ClientInterface {
 		gbc_txtAdress.gridy = 5;
 		panelFieldsClientEdit.add(txtAdress, gbc_txtAdress);
 		txtAdress.setColumns(10);
-
+		
 		JLabel lblPass = new JLabel("Contrase\u00F1a");
 		GridBagConstraints gbc_lblPass = new GridBagConstraints();
 		gbc_lblPass.anchor = GridBagConstraints.EAST;
@@ -280,26 +274,26 @@ public class ClientInterface {
 		gbc_lblPass.gridx = 0;
 		gbc_lblPass.gridy = 6;
 		panelFieldsClientEdit.add(lblPass, gbc_lblPass);
-
+		
 		txtPass = new JPasswordField();
 		GridBagConstraints gbc_txtPass = new GridBagConstraints();
 		gbc_txtPass.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPass.gridx = 1;
 		gbc_txtPass.gridy = 6;
 		panelFieldsClientEdit.add(txtPass, gbc_txtPass);
-
+		
 		JPanel panelTitleClientEdit = new JPanel();
 		panelClientEdit.add(panelTitleClientEdit, BorderLayout.NORTH);
-
+		
 		JLabel lblTitleClientEdit = new JLabel("Edici\u00F3n de cliente");
 		lblTitleClientEdit.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panelTitleClientEdit.add(lblTitleClientEdit);
-
+		
 		JPanel panelButtonsClientEdit = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelButtonsClientEdit.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panelClientEdit.add(panelButtonsClientEdit, BorderLayout.SOUTH);
-
+		
 		JButton buttonSave = new JButton("Guardar");
 		buttonSave.addMouseListener(new MouseAdapter() {
 			@Override
@@ -308,7 +302,7 @@ public class ClientInterface {
 			}
 		});
 		panelButtonsClientEdit.add(buttonSave);
-
+		
 		JButton buttonCancel = new JButton("Cancelar");
 		buttonCancel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -318,62 +312,44 @@ public class ClientInterface {
 		});
 		panelButtonsClientEdit.add(buttonCancel);
 	}
+<<<<<<< HEAD
+	
+	private static void deleteClient(){
+	
+=======
 
 	private static void deleteClient() {
 		int row = table.getSelectedRow();
 		int id = Integer.parseInt(table.getValueAt(row, 0).toString());
 		ClientManagement.deleteClient(id);
+>>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
 	}
-
-	private static void editClient() {
+	
+	private static void editClient(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientEdit");
 	}
-
-	private static void addClient() {
+	
+	private static void addClient(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientEdit");
 	}
-
-	private static void refresh() {
-		ArrayList<Client> clients = ClientManagement.getClients();
+	
+	private static void refresh(){
 		
-		// Empty table
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		while(model.getRowCount() > 0){
-			model.removeRow(0);
-		}
-		
-		// Fill the table with the scores
-		for(Client c: clients){
-			Object[] row = {c.getId(), c.getName(), c.getSurname(), c.getTelephone(), c.getEmail(), c.getAddress(), c.getPassword()};
-			model.addRow(row);
-		}
 	}
-
-	private static void saveClient() {
-		Client c = new Client();
-		c.setName(txtName.getText());
-		c.setSurname(txtSurnames.getText());
-		c.setTelephone(Long.parseLong(txtTelephone.getText()));
-		c.setEmail(txtEmail.getText());
-		c.setAddress(txtAdress.getText());
-		c.setPassword(String.valueOf(txtPass.getPassword()));
-		try {
-			ClientManagement.addClient(c);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	private static void saveClient(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientList");
 	}
-
-	private static void cancelSave() {
+	
+	private static void cancelSave(){
 		CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 		cardLayout.show(frame.getContentPane(), "ClientList");
 	}
-
-	private static void search() {
+	
+	private static void search(){
+		
 	}
 }

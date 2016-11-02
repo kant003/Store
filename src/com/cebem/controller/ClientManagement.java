@@ -13,6 +13,7 @@ import com.cebem.model.Client;
 
 public class ClientManagement {
 
+	static Connection con = null;
 	// Method for connecting to the DB
 	public static Connection getConnectionDB() throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
@@ -29,7 +30,11 @@ public class ClientManagement {
 			Class.forName(sDriver).newInstance();
 			// The connection is established
 			con = DriverManager.getConnection(sURL, user, pass);
+<<<<<<< HEAD
 			System.err.println("Conexiï¿½n establecida");
+=======
+			//System.err.println("Conexión establecida");
+>>>>>>> 5f23a9ef1dd9fc06be032f832980d80f91d201b5
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException mte) {
 			mte.printStackTrace();
 			throw new SQLException(mte.getMessage());
@@ -42,6 +47,7 @@ public class ClientManagement {
 	}
 
 	public int addDB2(Client c) throws SQLException{
+<<<<<<< HEAD
 		// Setting parameters for the connection
 		Connection connection = null;
 		String user = "";
@@ -66,11 +72,13 @@ public class ClientManagement {
 			connection = DriverManager.getConnection(url, user, password);
 			System.err.println("Connection established");
 
+=======
+>>>>>>> 5f23a9ef1dd9fc06be032f832980d80f91d201b5
 			// We create the sentence
 			String sql = "INSERT INTO Client VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 			// We create the PreparedStatement
-			PreparedStatement pstm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); // Para
+			PreparedStatement pstm = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); // Para
 			// devolver
 			// la
 			// ID
@@ -90,8 +98,14 @@ public class ClientManagement {
 			pstm.setString(6, c.getAddress());
 
 			pstm.setString(7, c.getPassword());
+<<<<<<< HEAD
 
 		return 1;
+=======
+		
+			int totalInserciones = pstm.executeUpdate();
+		return totalInserciones;
+>>>>>>> 5f23a9ef1dd9fc06be032f832980d80f91d201b5
 	}
 	// Method for closing the connection to the DB
 	public static Connection closeConnectionDB(Connection con) throws SQLException {
@@ -100,14 +114,8 @@ public class ClientManagement {
 	}
 
 	// Method for adding clients to the DB
-	public static int addClient(Client c) throws ClassNotFoundException {
-		Connection con = null;
-		try {
-			con = getConnectionDB();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+	public static int addDB(Client c) throws ClassNotFoundException {
+		
 
 		try {
 			// We create the sentence
@@ -129,7 +137,7 @@ public class ClientManagement {
 
 			// We execute the sentence
 			int filas = pstm.executeUpdate();
-			System.out.println("Filas afectadas: " + filas);
+			//System.out.println("Filas afectadas: " + filas);
 
 			ResultSet rs = pstm.getGeneratedKeys();
 			if (rs != null && rs.next()) {
@@ -138,7 +146,7 @@ public class ClientManagement {
 			}
 
 
-		con.close();
+		
 		}  catch (SQLException sqle) {
 			sqle.printStackTrace();
 		} catch (Exception e) {
@@ -148,20 +156,34 @@ public class ClientManagement {
 		return 0;
 	}
 
-	public void selectSingleDB(int id) {
 
+	public Client selectSingleDB(int id) throws SQLException{
+		Client c = new Client();
 		ArrayList<Client> arrayClients = new ArrayList<Client>();
-
-		for (Client e : arrayClients) {
-
-			if (e.equals(id)) {
-				boolean result = true;
-				System.out.println(e); // Esto deberia ir en la interfaz
-				// guiclient
-				break;
-
+		try {
+		String query = "SELECT * FROM Client WHERE id = ?";
+		PreparedStatement pstm = con.prepareStatement(query);
+		ResultSet rs = pstm.executeQuery();
+		
+		
+			while(rs.next()){
+				
+			    /*Retrieve one client details 
+			    and store it in client object*/
+			    c.setId(rs.getInt(1));
+			    c.setName(rs.getString(2));
+			    c.setSurname(rs.getString(3));
+			    c.setTelephone(rs.getLong(4));
+			    c.setEmail(rs.getString(5));
+			    c.setAddress(rs.getString(6));
+			    c.setPassword(rs.getString(7));
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new SQLException();
 		}
+<<<<<<< HEAD
 	}
 
 
@@ -177,6 +199,25 @@ public class ClientManagement {
 
 			Statement statement = con.createStatement();
 			rs = statement.executeQuery(query);
+=======
+		return c;
+
+	}
+
+
+	
+	// Method for getting the clients from the DB
+	public static ArrayList<Client> getClients(){
+		ArrayList<Client> clients = new ArrayList<Client>();
+	
+		String query = "SELECT * FROM Client";
+        ResultSet rs = null;
+		try {
+			
+			Statement statement = con.createStatement();
+			rs = statement.executeQuery(query);
+			
+>>>>>>> 5f23a9ef1dd9fc06be032f832980d80f91d201b5
 
 			while (rs.next()) {
                 Client c = new Client();
@@ -195,17 +236,28 @@ public class ClientManagement {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		}
+<<<<<<< HEAD
 
 		return clients;
 	}
 
+=======
+		return clients;
+	}
+
+
+
+
+	
+>>>>>>> 5f23a9ef1dd9fc06be032f832980d80f91d201b5
 	// Method for deleting a client
 	public static void deleteClient(int id){
-	    Connection con = null;
+	    
 	    PreparedStatement st = null;
 		try {
-			con = getConnectionDB();
+			
 			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
 			st.setInt(1, id);
 			st.executeUpdate();
@@ -213,11 +265,10 @@ public class ClientManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    try {
-			con = closeConnectionDB(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	   
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5f23a9ef1dd9fc06be032f832980d80f91d201b5
 }
