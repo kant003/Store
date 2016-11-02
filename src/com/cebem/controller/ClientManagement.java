@@ -3,6 +3,13 @@ package com.cebem.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import java.sql.Statement;
+>>>>>>> origin/master
+>>>>>>> 11cc8daecdc4784c3e8ac337502876087ffb011f
 import java.util.ArrayList;
 import java.util.TimeZone;
 import java.sql.PreparedStatement;
@@ -146,6 +153,10 @@ public class ClientManagement {
 
 		return 0;
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 11cc8daecdc4784c3e8ac337502876087ffb011f
 
 	public void selectSingleDB(int id) {
 
@@ -161,7 +172,29 @@ public class ClientManagement {
 <<<<<<< HEAD
 
 			}
+<<<<<<< HEAD
 =======
+=======
+		}
+
+	}
+
+=======
+	
+	// Method for getting the clients from the DB
+	public static ArrayList<Client> getClients(){
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		Connection con = null;
+		String query = "SELECT * FROM Client";
+        ResultSet rs = null;
+		try {
+			con = getConnectionDB();
+			
+			Statement statement = con.createStatement();
+			rs = statement.executeQuery(query);
+			
+>>>>>>> 11cc8daecdc4784c3e8ac337502876087ffb011f
 			while (rs.next()) {
                 Client c = new Client();
                 /*Retrieve one client details 
@@ -208,5 +241,9 @@ public class ClientManagement {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 >>>>>>> 7f998ded29ba48e2d90147e8eb04995948646987
+=======
+>>>>>>> origin/master
+>>>>>>> 11cc8daecdc4784c3e8ac337502876087ffb011f
 }
