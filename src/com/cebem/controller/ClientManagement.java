@@ -16,12 +16,10 @@ public class ClientManagement {
 	static Connection con = null;
 
 	// Method for connecting to the DB
-	public static void openConnectionDB() throws SQLException {
+	public static void openConnectionDB(String user, String pass) throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
 		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
-		String user = "Store";// User
-		String pass = "Ad123";// Pass
 		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
 		con = null;
@@ -31,7 +29,7 @@ public class ClientManagement {
 			Class.forName(sDriver).newInstance();
 			// The connection is established
 			con = DriverManager.getConnection(sURL, user, pass);
-			// System.err.println("Conexión establecida");
+			// System.err.println("Conexiï¿½n establecida");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException mte) {
 			mte.printStackTrace();
 			throw new SQLException(mte.getMessage());
@@ -148,7 +146,6 @@ public class ClientManagement {
 
 	// Method for deleting a client
 	public static void deleteClient(int id) {
-
 		PreparedStatement st = null;
 		try {
 			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");

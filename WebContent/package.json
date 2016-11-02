@@ -1,0 +1,25 @@
+{
+    "name": "store-website",
+    "version": "1.0.0",
+    "description": "Site for the Store",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "deploy": "surge --domain cebem-store.surge.sh",
+        "build": "webpack ./entry.js bundle.js"
+    },
+    "author": "Ivan Nieto",
+    "license": "MIT",
+    "devDependencies": {
+        "connect": "^3.5.0",
+        "serve-static": "^1.11.1",
+        "webpack": "^1.13.3"
+    },
+    "dependencies": {
+        "alasql": "^0.3.3",
+        "bootstrap": "^3.3.7",
+        "jquery": "^3.1.1",
+        "normalizecss": "^3.0.0",
+        "surge": "0.18.0"
+    }
+}
