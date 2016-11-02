@@ -9,7 +9,7 @@ import java.util.TimeZone;
 import com.cebem.model.Product;
 import com.cebem.model.Provider;
 
-public class ProviderManagement{
+public class ProviderManagement {
 	// Method for connecting to the DB
 	public static Connection getConnectionDB() throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
@@ -18,7 +18,7 @@ public class ProviderManagement{
 		String user = "Store";// User
 		String pass = "Ad123";// Pass
 		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
-													// is needed
+		// is needed
 		Connection con = null;
 
 		try {
@@ -43,22 +43,30 @@ public class ProviderManagement{
 		con.close();
 		return con;
 	}
-	
-	
-	public void selectSingleDB(int id) {
 
-		ArrayList<Provider> arrayProviders = new ArrayList<Provider>();
+	public Provider getSingleProvider(int id) throws SQLException {
+		Provider pv = new Provider();
+		try {
+			String query = "SELECT * FROM Provider WHERE id = ?";
+			PreparedStatement pstm = con.prepareStatement(query);
+			ResultSet rs = pstm.executeQuery();
 
-		for (Provider pv : arrayProviders) {
+			while (rs.next()) {
+				/*
+				 * Retrieve one client details and store it in client object
+				 */
 
-			if (pv.equals(id)) {
-				
-				System.out.println(pv); // Esto deberia ir en la interfaz
-				// guiProvider
-			
-
+				pv.setId(rs.getInt(1));
+				pv.setName(rs.getString(2));
+				pv.setAddress(rs.getString(3));
+				pv.setEmail(rs.getString(4));
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new SQLException();
 		}
-
+		return pv;
 	}
+
 }

@@ -18,7 +18,7 @@ public class ProductManagement {
 		String user = "Store";// User
 		String pass = "Ad123";// Pass
 		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
-													// is needed
+		// is needed
 		Connection con = null;
 
 		try {
@@ -43,7 +43,7 @@ public class ProductManagement {
 		con.close();
 		return con;
 	}
-	
+
 	public Product getSingleProduct(int id) throws SQLException {
 		Product p = new Product();
 		try {
@@ -55,13 +55,13 @@ public class ProductManagement {
 				/*
 				 * Retrieve one client details and store it in client object
 				 */
-			
+
 				p.setId(rs.getInt(1));
 				p.setName(rs.getString(2));
 				p.setRef(rs.getInt(3));
 				p.setPrice(rs.getDouble(4));
 				p.setIdprovider(rs.getInt(5));
-			
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -71,9 +71,8 @@ public class ProductManagement {
 		return p;
 	}
 
-	
-	
-		}
 
-	}
+
 }
+
+}}
