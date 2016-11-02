@@ -124,31 +124,32 @@ public class ClientManagement extends DBManagement {
 			e.printStackTrace();
 		}
 	}
-	
-	public ArrayList<Client> findClientsDB(String param){
-		//The array for return the clients
-		ArrayList<Client> arrCli=null;
-		PreparedStatement pstm=null;
-		ResultSet result=null;
-		
-		try{           
-			String query = "SELECT Client.id,name,surname,telephone,email,address,password"
-                    + " FROM Client WHERE Client.name like '%"+param+"%' Or Client.surname like '%"+param
-                    + "%' Or Client.telephone like '%"+param+"%' Or Client.email like '%"+param
-                    + "%' Or Client.address like '%"+param+"%';";
 
-           pstm = con.prepareStatement(query);
-           result = pstm.executeQuery();
-            
-           //Recorremos el resultado, guardadno los resultados en el arrCli
-           while(result.next()){
-               System.out.println(result.getString("Nombre") +"\t"+
-               result.getDate("fechaAlta") +"\t" +result.getDouble("Salario") +"\t"+
-               result.getDouble("Comision") +"\t" +result.getString("DepNombre") +"\t"+
-               result.getString("Localidad"));   
-           }
-        
-        }catch(SQLException sqle){sqle.printStackTrace();}
+	public ArrayList<Client> findClientsDB(String param) {
+		// The array for return the clients
+		ArrayList<Client> arrCli = null;
+		PreparedStatement pstm = null;
+		ResultSet result = null;
+
+		try {
+			String query = "SELECT Client.id,name,surname,telephone,email,address,password"
+					+ " FROM Client WHERE Client.name like '%" + param + "%' Or Client.surname like '%" + param
+					+ "%' Or Client.telephone like '%" + param + "%' Or Client.email like '%" + param
+					+ "%' Or Client.address like '%" + param + "%';";
+
+			pstm = con.prepareStatement(query);
+			result = pstm.executeQuery();
+
+			// Recorremos el resultado, guardadno los resultados en el arrCli
+			while (result.next()) {
+				System.out.println(result.getString("Nombre") + "\t" + result.getDate("fechaAlta") + "\t"
+						+ result.getDouble("Salario") + "\t" + result.getDouble("Comision") + "\t"
+						+ result.getString("DepNombre") + "\t" + result.getString("Localidad"));
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
 
 		return arrCli;
 	}

@@ -22,20 +22,18 @@ public class ProviderManagement extends DBManagement {
 				System.out.println(pv); // Esto deberia ir en la interfaz
 				// guiProvider
 
-<<<<<<< HEAD
+
 				pv.setId(rs.getInt(1));
 				pv.setName(rs.getString(2));
 				pv.setAddress(rs.getString(3));
 				pv.setEmail(rs.getString(4));
-				Provider.add(pv);
-=======
->>>>>>> bc083ef314e47c4057758c40fcdecd84110be4af
+
+
 			}
 		}
-<<<<<<< HEAD
 		return pv;
 	}
-	
+
 	public static ArrayList<Provider> getProviders() {
 		ArrayList<Product> providers = new ArrayList<Product>();
 
@@ -65,8 +63,7 @@ public class ProviderManagement extends DBManagement {
 		}
 		return providers;
 	}
-=======
->>>>>>> bc083ef314e47c4057758c40fcdecd84110be4af
 
-	}
+
+}
 }
