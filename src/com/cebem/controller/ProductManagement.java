@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.TimeZone;
 
 import com.cebem.model.Product;
+import com.cebem.model.String;
 
 public class ProductManagement {
 	// Method for connecting to the DB
@@ -42,6 +43,38 @@ public class ProductManagement {
 		con.close();
 		return con;
 	}
+	
+	public Product getSingleProduct(int id) throws SQLException {
+		Product p = new Product();
+		try {
+			String query = "SELECT * FROM Product WHERE id = ?";
+			PreparedStatement pstm = con.prepareStatement(query);
+			ResultSet rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				/*
+				 * Retrieve one client details and store it in client object
+				 */
+				int id;
+				String name;
+				int ref;
+				double price;
+				int idProvider;
+				p.setId(rs.getInt(1));
+				p.setName(rs.getString(2));
+				p.setRef(rs.getInt(3));
+				p.setPrice(rs.getDouble(4));
+				p.setIdprovider(rs.getInt(5));
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new SQLException();
+		}
+		return p;
+	}
+
 	
 	public void selectSingleDB(int id) {
 
