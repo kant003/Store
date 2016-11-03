@@ -11,6 +11,25 @@ import com.cebem.model.Provider;
 
 public class ProviderManagement extends DBManagement {
 
+	public boolean updateProvider(int id, Provider provider){
+		String query = "UPDATE product SET name=?, address=?, email=? WHERE Id=?;";
+
+		PreparedStatement ps;
+		try {
+			ps= (PreparedStatement)con.prepareStatement(query);
+
+			ps.setString(1 , provider.getName());
+			ps.setString(2, provider.getAddress());
+			ps.setString(3, provider.getEmail());
+			ps.setInt(4, id);
+			ps.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public void selectSingleDB(int id) {
 
 		ArrayList<Provider> arrayProviders = new ArrayList<Provider>();
