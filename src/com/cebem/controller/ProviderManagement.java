@@ -49,7 +49,7 @@ public class ProviderManagement extends DBManagement {
 
 	public Provider getSingleProvider(int id) throws SQLException {
 		Provider p = new Provider();
-		try {
+		
 			String query = "SELECT * FROM Provider WHERE id = ?";
 			PreparedStatement pstm = con.prepareStatement(query);
 			ResultSet rs = pstm.executeQuery();
@@ -65,11 +65,7 @@ public class ProviderManagement extends DBManagement {
 				p.setPhone(rs.getLong(5));
 
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new SQLException();
-		}
+		
 		return p;
 	}
 
