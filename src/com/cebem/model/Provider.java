@@ -6,13 +6,23 @@ public class Provider {
 	String name;
 	String address;
 	String email;
+	long phone;
 
-	public Provider(int id, String name, String address, String email) {
+	public Provider(int id, String name, String address, String email, long phone) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.email = email;
+		this.phone= phone;
+	}
+
+	public long getPhone() {
+		return phone;
+	}
+
+	public void setPhone(long phone) {
+		this.phone = phone;
 	}
 
 	public Provider() {
@@ -26,6 +36,7 @@ public class Provider {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 
 	public String getName() {
 		return name;

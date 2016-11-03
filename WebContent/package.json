@@ -1,25 +1,37 @@
 {
-    "name": "store-website",
-    "version": "1.0.0",
-    "description": "Site for the Store",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "deploy": "surge --domain cebem-store.surge.sh",
-        "build": "webpack ./entry.js bundle.js"
-    },
-    "author": "Ivan Nieto",
-    "license": "MIT",
-    "devDependencies": {
-        "connect": "^3.5.0",
-        "serve-static": "^1.11.1",
-        "webpack": "^1.13.3"
-    },
-    "dependencies": {
-        "alasql": "^0.3.3",
-        "bootstrap": "^3.3.7",
-        "jquery": "^3.1.1",
-        "normalizecss": "^3.0.0",
-        "surge": "0.18.0"
-    }
+  "name": "store-website",
+  "version": "1.0.0",
+  "description": "Site for the Store",
+  "main": "index.js",
+  "scripts": {
+    "local": "webpack ./entry.js bundle.js && node server.js",
+    "deploy": "webpack ./entry.js bundle.js && surge --domain cebem-store.surge.sh &&",
+    "build": "webpack ./entry.js bundle.js"
+  },
+  "author": "Ivan Nieto",
+  "license": "MIT",
+  "devDependencies": {
+    "connect": "^3.5.0",
+    "css-loader": "^0.25.0",
+    "exports-loader": "^0.6.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "font-awesome": "^4.7.0",
+    "imports-loader": "^0.6.5",
+    "serve-static": "^1.11.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "alasql": "^0.3.3",
+    "bootstrap": "^3.3.7",
+    "bootstrap-webpack": "0.0.5",
+    "font-awesome-webpack": "0.0.4",
+    "jquery": "^3.1.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "normalizecss": "^3.0.0",
+    "surge": "0.18.0"
+  }
 }
