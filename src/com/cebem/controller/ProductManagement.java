@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
+import com.cebem.controller.DBManagement;
 import com.cebem.model.Product;
 
 public class ProductManagement extends DBManagement {

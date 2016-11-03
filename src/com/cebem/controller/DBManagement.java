@@ -13,7 +13,7 @@ public class DBManagement {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
 		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
-		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
+		String sDriver = "com.mysql.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
 		con = null;
 

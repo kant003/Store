@@ -316,11 +316,11 @@ public class ClientInterface {
 	private void deleteClient() {
 		int row = table.getSelectedRow();
 		int id = Integer.parseInt(table.getValueAt(row, 0).toString());
-<<<<<<< HEAD
+
 		
 		ClientManagement.deleteClient(id);
-		
-=======
+	
+
 		try {
 			ClientManagement.openConnectionDB("User", "Ad1234");
 			ClientManagement.deleteClient(id);
@@ -330,7 +330,7 @@ public class ClientInterface {
 			e.printStackTrace();
 		}
 		refresh();
->>>>>>> origin/master
+
 	}
 	
 	private void editClient(){
