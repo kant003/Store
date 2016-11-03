@@ -1,5 +1,11 @@
 package com.cebem.view;
 
+/*
+ * 
+ * Clase que genera la GUI para la gestión de Clientes
+ * 
+ * */
+
 import java.awt.BorderLayout;	
 import java.awt.CardLayout;
 import java.awt.EventQueue;
@@ -27,8 +33,10 @@ import javax.swing.JTextField;
 import com.cebem.controller.ClientManagement;
 import com.cebem.model.Client;
 
+
 public class ClientInterface {
 
+	// VARIABLES
 	private static JFrame frame;
 	private JTable table;
 	private JTextField txtId;
@@ -41,7 +49,9 @@ public class ClientInterface {
 	private JPasswordField txtPass;
 
 	/**
-	 * Launch the application.
+	 * Lanza la aplicación
+	 * 
+	 * @param args String[] default
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,14 +68,16 @@ public class ClientInterface {
 	}
 
 	/**
-	 * Create the application.
+	 * Crea la aplicación
+	 * 
 	 */
 	public ClientInterface() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa el contenido del Frame
+	 * 
 	 */
 	private void initialize() {
 		frame = new JFrame();
