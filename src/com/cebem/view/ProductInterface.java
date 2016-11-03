@@ -18,6 +18,8 @@ import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class ProductInterface {
 
@@ -58,6 +60,7 @@ public class ProductInterface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ProductInterface.class.getResource("/com/cebem/view/icon.png")));
 		frame.setBounds(100, 100, 624, 364);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
@@ -75,8 +78,9 @@ public class ProductInterface {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblListadoDeProductos = new JLabel("Listado de Productos                         ");
+		lblListadoDeProductos.setForeground(Color.MAGENTA);
 		panel_1.add(lblListadoDeProductos);
-		lblListadoDeProductos.setFont(new Font("Source Code Pro Black", Font.PLAIN, 15));
+		lblListadoDeProductos.setFont(new Font("Dialog", Font.BOLD, 15));
 		
 		JLabel lblBuscar = new JLabel("Buscar:");
 		panel_1.add(lblBuscar);
