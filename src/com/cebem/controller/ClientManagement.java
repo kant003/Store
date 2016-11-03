@@ -135,22 +135,27 @@ public class ClientManagement extends DBManagement {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Este método recoge una cadena, la convierte en una consulta
+ * que nos recoge los clientes con algún parámetro coincidente(excluyendo id y password)
+ */
 	public ArrayList<Client> findClientsDB(String param) {
 		ArrayList<Client> arrCli=null;
 		PreparedStatement pstm=null;
 		ResultSet result=null;
 
 		try{
+			//Creamos la consulta
 			String query="SELECT Client.id,name,surname,telephone,email,address,password"
 					+ " FROM Client WHERE Client.name like '%" + param + "%' Or Client.surname like '%" + param
 					+ "%' Or Client.telephone like '%" + param + "%' Or Client.email like '%" + param
 					+ "%' Or Client.address like '%" + param + "%';";
 
+			//La ejecutamos y guardamos los resultados en un ResultSet
 			pstm=con.prepareStatement(query);
 			result=pstm.executeQuery();
 
-			// Recorremos el resultado, guardadno los resultados en el arrCli
+			// Recorremos el ResultSet, guardando los resultados en el arrCli
 			while (result.next()) {
 				Client c = new Client();
 				c.setId(result.getInt(1));
