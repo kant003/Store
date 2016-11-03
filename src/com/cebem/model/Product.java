@@ -7,14 +7,16 @@ public class Product {
 	int ref;
 	double price;
 	int idProvider;
+	int stock;
 
-	public Product(int id, String name, int ref, double price, int idProvider) {
+	public Product(int id, String name, int ref, double price, int idProvider, int stock) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.ref = ref;
 		this.price = price;
 		this.idProvider = idProvider;
+		this.stock = stock;
 	}
 
 	public Product() {
@@ -59,6 +61,14 @@ public class Product {
 
 	public void setIdProvider(int idProvider) {
 		this.idProvider = idProvider;
+	}
+	
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	@Override
