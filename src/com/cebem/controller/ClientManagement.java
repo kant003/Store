@@ -123,30 +123,33 @@ public class ClientManagement extends DBManagement {
 	}
 
 	public ArrayList<Client> findClientsDB(String param) {
-		// The array for return the clients
-		ArrayList<Client> arrCli = null;
-		PreparedStatement pstm = null;
-		ResultSet result = null;
+		ArrayList<Client> arrCli=null;
+		PreparedStatement pstm=null;
+		ResultSet result=null;
 
-		try {
-			String query = "SELECT Client.id,name,surname,telephone,email,address,password"
+		try{
+			String query="SELECT Client.id,name,surname,telephone,email,address,password"
 					+ " FROM Client WHERE Client.name like '%" + param + "%' Or Client.surname like '%" + param
 					+ "%' Or Client.telephone like '%" + param + "%' Or Client.email like '%" + param
 					+ "%' Or Client.address like '%" + param + "%';";
 
-			pstm = con.prepareStatement(query);
-			result = pstm.executeQuery();
+			pstm=con.prepareStatement(query);
+			result=pstm.executeQuery();
 
 			// Recorremos el resultado, guardadno los resultados en el arrCli
 			while (result.next()) {
-				System.out.println(result.getString("Nombre") + "\t" + result.getDate("fechaAlta") + "\t"
-						+ result.getDouble("Salario") + "\t" + result.getDouble("Comision") + "\t"
-						+ result.getString("DepNombre") + "\t" + result.getString("Localidad"));
+				Client c = new Client();
+				c.setId(result.getInt(1));
+				c.setName(result.getString(2));
+				c.setSurname(result.getString(3));
+				c.setTelephone(result.getLong(4));
+				c.setEmail(result.getString(5));
+				c.setAddress(result.getString(6));
+				c.setPassword(result.getString(7));
+				arrCli.add(c);
 			}
 
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
+		}catch (SQLException sqle){sqle.printStackTrace();}
 
 		return arrCli;
 	}
