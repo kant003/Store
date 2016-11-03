@@ -106,6 +106,7 @@ public class ProviderManagement extends DBManagement {
 		return providers;
 	}
 
+	
 	// Method for deleting a provider
 	public static void deleteProvider(int id) {
 		PreparedStatement st = null;
