@@ -12,6 +12,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.cebem.controller.ClientManagement;
+import com.cebem.model.Client;
 
 public class ClientInterface {
 
@@ -313,7 +316,21 @@ public class ClientInterface {
 	private void deleteClient() {
 		int row = table.getSelectedRow();
 		int id = Integer.parseInt(table.getValueAt(row, 0).toString());
+
+		
 		ClientManagement.deleteClient(id);
+	
+
+		try {
+			ClientManagement.openConnectionDB("User", "Ad1234");
+			ClientManagement.deleteClient(id);
+			ClientManagement.closeConnectionDB();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		refresh();
+
 	}
 	
 	private void editClient(){
@@ -327,7 +344,14 @@ public class ClientInterface {
 	}
 	
 	private void refresh(){
-		
+		try {
+			ClientManagement.openConnectionDB("User", "Ad1234");
+			ArrayList<Client> clients = ClientManagement.getClients();
+			ClientManagement.closeConnectionDB();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void saveClient(){

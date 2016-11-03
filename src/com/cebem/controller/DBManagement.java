@@ -1,5 +1,10 @@
 package com.cebem.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.TimeZone;
+
 public class DBManagement {
 	static Connection con = null;
 
@@ -8,7 +13,7 @@ public class DBManagement {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
 		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
-		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
+		String sDriver = "com.mysql.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
 		con = null;
 
@@ -28,8 +33,8 @@ public class DBManagement {
 	}
 
 	// Method for closing the connection to the DB
-	public static Connection closeConnectionDB(Connection con) throws SQLException {
+	public static void closeConnectionDB() throws SQLException {
 		con.close();
-		return con;
+		con = null;
 	}
 }
