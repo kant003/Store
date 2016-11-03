@@ -13,7 +13,13 @@ import com.cebem.model.Client;
 public class ClientManagement extends DBManagement {
 
 
-	// Method for adding clients to the DB
+	/**
+	 * Añade un Cliente a la BD
+	 * 
+	 * @param c Object Client
+	 * @return 0
+	 * @throws ClassNotFoundException
+	 */
 	public static int addClient(Client c) throws ClassNotFoundException {
 
 		try {
@@ -51,6 +57,13 @@ public class ClientManagement extends DBManagement {
 		return 0;
 	}
 
+	/**
+	 * Selecciona un Cliente de la BD dada su id
+	 * 
+	 * @param id Integer
+	 * @return c Object Client
+	 * @throws SQLException
+	 */
 	public Client getSingleClient(int id) throws SQLException {
 		Client c = new Client();
 		try {
@@ -59,9 +72,8 @@ public class ClientManagement extends DBManagement {
 			ResultSet rs = pstm.executeQuery();
 
 			while (rs.next()) {
-				/*
-				 * Retrieve one client details and store it in client object
-				 */
+				
+				// Establecemos los valores para los parámetros que debemos guardar en un objeto Client
 				c.setId(rs.getInt(1));
 				c.setName(rs.getString(2));
 				c.setSurname(rs.getString(3));
@@ -71,7 +83,6 @@ public class ClientManagement extends DBManagement {
 				c.setPassword(rs.getString(7));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new SQLException();
 		}
@@ -105,7 +116,7 @@ public class ClientManagement extends DBManagement {
 				clients.add(c);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 
 		}
@@ -120,7 +131,7 @@ public class ClientManagement extends DBManagement {
 			st.setInt(1, id);
 			st.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
