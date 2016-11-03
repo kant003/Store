@@ -1,6 +1,3 @@
 build/
-<<<<<<< HEAD
 .classpath
-=======
-node_modules/
->>>>>>> origin/master
+WebContent/node_modules/
