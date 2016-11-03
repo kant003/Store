@@ -1,15 +1,12 @@
 package com.cebem.controller;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
-import com.cebem.controller.DBManagement;
 import com.cebem.model.Client;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 
 
