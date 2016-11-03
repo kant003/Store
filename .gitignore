@@ -1,2 +1,6 @@
 build/
+<<<<<<< HEAD
 .classpath
+=======
+node_modules/
+>>>>>>> origin/master

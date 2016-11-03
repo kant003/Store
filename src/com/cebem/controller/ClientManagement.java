@@ -1,19 +1,21 @@
 package com.cebem.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.TimeZone;
 
 import com.cebem.model.Client;
 
+=======
+>>>>>>> origin/master
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
 
+<<<<<<< HEAD
 public class ClientManagement {
 
 	static Connection con = null;
@@ -51,6 +53,9 @@ public class ClientManagement {
 		con = null;
 		return con;
 	}
+=======
+public class ClientManagement extends DBManagement {
+>>>>>>> origin/master
 
 	// Method for adding clients to the DB
 	public static int addClient(Client c) throws ClassNotFoundException {
@@ -153,7 +158,6 @@ public class ClientManagement {
 
 	// Method for deleting a client
 	public static void deleteClient(int id) {
-
 		PreparedStatement st = null;
 		try {
 			st = con.prepareStatement("DELETE FROM Client WHERE id = ?");
@@ -163,5 +167,37 @@ public class ClientManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<Client> findClientsDB(String param) {
+		ArrayList<Client> arrCli=null;
+		PreparedStatement pstm=null;
+		ResultSet result=null;
+
+		try{
+			String query="SELECT Client.id,name,surname,telephone,email,address,password"
+					+ " FROM Client WHERE Client.name like '%" + param + "%' Or Client.surname like '%" + param
+					+ "%' Or Client.telephone like '%" + param + "%' Or Client.email like '%" + param
+					+ "%' Or Client.address like '%" + param + "%';";
+
+			pstm=con.prepareStatement(query);
+			result=pstm.executeQuery();
+
+			// Recorremos el resultado, guardadno los resultados en el arrCli
+			while (result.next()) {
+				Client c = new Client();
+				c.setId(result.getInt(1));
+				c.setName(result.getString(2));
+				c.setSurname(result.getString(3));
+				c.setTelephone(result.getLong(4));
+				c.setEmail(result.getString(5));
+				c.setAddress(result.getString(6));
+				c.setPassword(result.getString(7));
+				arrCli.add(c);
+			}
+
+		}catch (SQLException sqle){sqle.printStackTrace();}
+
+		return arrCli;
 	}
 }
