@@ -6,10 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.TimeZone;
+
+import com.cebem.model.Client;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.cebem.model.Client;
+
 
 public class ClientManagement {
 
@@ -24,7 +27,7 @@ public class ClientManagement {
 		String pass = "Ad123";// Pass
 		String sDriver = "com.mysql.cj.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
-		con = null;
+		
 
 		try {
 			// Method for loading the DB driver
@@ -39,11 +42,13 @@ public class ClientManagement {
 			e.printStackTrace();
 			throw new SQLException(e.getMessage());
 		}
+		
 	}
 
 	// Method for closing the connection to the DB
 	public static Connection closeConnectionDB(Connection con) throws SQLException {
 		con.close();
+		con = null;
 		return con;
 	}
 
