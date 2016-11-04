@@ -83,7 +83,7 @@ public class ClientInterface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClientInterface.class.getResource("/com/cebem/view/iconojefolla.png")));
+		//frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClientInterface.class.getResource("/com/cebem/view/iconojefolla.png")));
 		frame.setBounds(100, 100, 600, 300);
 		frame.setMinimumSize(frame.getSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -338,7 +338,7 @@ public class ClientInterface {
 	
 
 		try {
-			ClientManagement.openConnectionDB("User", "Ad1234");
+			ClientManagement.openConnectionDB("store", "Ad1234");
 			ClientManagement.deleteClient(id);
 			ClientManagement.closeConnectionDB();
 		} catch (SQLException e) {
@@ -361,7 +361,7 @@ public class ClientInterface {
 	
 	private void refresh(){
 		try {
-			ClientManagement.openConnectionDB("User", "Ad1234");
+			ClientManagement.openConnectionDB("store", "Ad1234");
 			ArrayList<Client> clients = ClientManagement.getClients();
 			ClientManagement.closeConnectionDB();
 		} catch (SQLException e) {

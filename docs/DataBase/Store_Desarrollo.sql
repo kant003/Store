@@ -1,5 +1,5 @@
 CREATE DATABASE Store_Desarrollo;
-GRANT ALL ON Store_Desarrollo.* TO 'Provider'@'localhost' IDENTIFIED BY 'Ad1234';
+GRANT ALL ON Store_Desarrollo.* TO 'store'@'localhost' IDENTIFIED BY 'Ad1234';
 USE Store_Desarrollo; 
 
 CREATE TABLE Provider( 

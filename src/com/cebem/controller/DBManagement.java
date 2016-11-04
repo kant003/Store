@@ -12,7 +12,7 @@ public class DBManagement {
 	public static void openConnectionDB(String user, String pass) throws SQLException {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Madrid");
 		TimeZone.setDefault(timeZone);
-		String sURL = "jdbc:mysql://10.100.13.110/store_development?useSSL=false&serverTimezone=Europe/Madrid";
+		String sURL = "jdbc:mysql://10.100.13.197/store_development?useSSL=false&serverTimezone=Europe/Madrid";
 		String sDriver = "com.mysql.jdbc.Driver";// mysql-connector-java-6.0.4
 													// is needed
 		con = null;
