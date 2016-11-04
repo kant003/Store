@@ -132,7 +132,6 @@ public class ClientManagement extends DBManagement {
 		ArrayList<Client> arrCli=null;
 		PreparedStatement pstm=null;
 		ResultSet result=null;
-
 		try{
 			String query="SELECT Client.id,name,surname,telephone,email,address,password"
 					+ " FROM Client WHERE Client.name like '%" + param + "%' Or Client.surname like '%" + param
@@ -154,7 +153,6 @@ public class ClientManagement extends DBManagement {
 				c.setPassword(result.getString(7));
 				arrCli.add(c);
 			}
-
 		}catch (SQLException sqle){sqle.printStackTrace();}
 
 		return arrCli;
