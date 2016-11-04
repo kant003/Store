@@ -48,7 +48,7 @@ public class ProviderManagement extends DBManagement {
 	}
 
 	public Provider getSingleProvider(int id) throws SQLException {
-		Provider p = new Provider();
+		Provider p = null;
 		try {
 			String query = "SELECT * FROM Provider WHERE id = ?";
 			PreparedStatement pstm = con.prepareStatement(query);
@@ -58,6 +58,7 @@ public class ProviderManagement extends DBManagement {
 				/*
 				 * Retrieve one client details and store it in provider object
 				 */
+				p=new Provider();
 				p.setId(rs.getInt(1));
 				p.setName(rs.getString(2));
 				p.setAddress(rs.getString(3));

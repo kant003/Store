@@ -65,14 +65,14 @@ public class ClientManagement extends DBManagement {
 	 * @throws SQLException
 	 */
 	public Client getSingleClient(int id) throws SQLException {
-		Client c = new Client();
+		Client c =null; 
 		try {
 			String query = "SELECT * FROM Client WHERE id = ?";
 			PreparedStatement pstm = con.prepareStatement(query);
 			ResultSet rs = pstm.executeQuery();
 
 			while (rs.next()) {
-				
+				c=new Client();
 				// Establecemos los valores para los parámetros que debemos guardar en un objeto Client
 				c.setId(rs.getInt(1));
 				c.setName(rs.getString(2));
