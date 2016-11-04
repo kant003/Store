@@ -1,13 +1,21 @@
 package com.cebem.model;
 
+/*
+ * 
+ * Clase que definel el modelo de Proveedor (Provider)
+ * 
+ * */
+
 public class Provider {
+	
+	// ATRIBUTOS
+	int id; // Id del proveedor
+	String name; // Nombre del proveedor
+	String address; // Dirección del proveedor
+	String email; // Email del proveedor
+	long phone; // Teléfono del proveedor
 
-	int id;
-	String name;
-	String address;
-	String email;
-	long phone;
-
+	// CONSTRUCTOR
 	public Provider(int id, String name, String address, String email, long phone) {
 		super();
 		this.id = id;
@@ -17,6 +25,7 @@ public class Provider {
 		this.phone= phone;
 	}
 
+	// GETTERS & SETTERS
 	public long getPhone() {
 		return phone;
 	}
@@ -61,10 +70,10 @@ public class Provider {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	// TOSTRING
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 }

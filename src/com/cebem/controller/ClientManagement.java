@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 import com.cebem.model.Client;
 
 
@@ -92,14 +95,14 @@ public class ClientManagement extends DBManagement {
 	 * @throws SQLException
 	 */
 	public Client getSingleClient(int id) throws SQLException {
-		Client c = new Client();
+		Client c =null; 
 		try {
 			String query = "SELECT * FROM Client WHERE id = ?";
 			PreparedStatement pstm = con.prepareStatement(query);
 			ResultSet rs = pstm.executeQuery();
 
 			while (rs.next()) {
-				
+				c=new Client();
 				// Establecemos los valores para los parÃ¡metros que debemos guardar en un objeto Client
 				c.setId(rs.getInt(1));
 				c.setName(rs.getString(2));
@@ -167,7 +170,7 @@ public class ClientManagement extends DBManagement {
  * que nos recoge los clientes con algún parámetro coincidente(excluyendo id y password)
  */
 	public ArrayList<Client> findClientsDB(String param) {
-		ArrayList<Client> arrCli=null;
+		ArrayList<Client> arrCli=new ArrayList<Client>();
 		PreparedStatement pstm=null;
 		ResultSet result=null;
 
@@ -199,4 +202,69 @@ public class ClientManagement extends DBManagement {
 
 		return arrCli;
 	}
+	public void Actualizar(int id){
+		
+		
+		
+		String name = null; // Nombre del Cliente
+		String surname = null; // Apellidos del Cliente
+		String email = null; // Email del Cliente
+		String address = null; // Direccion del Cliente
+		String password = null; // Password del Cliente
+		long telephone = 0; // Telefono del Cliente
+
+int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar los datos actuales?");
+
+if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+try {
+
+
+getSingleClient(id);
+String Ssql = "UPDATE contacto SET name=?, surname=?, email=?, address=?, password=?, telephone=? "
+          + "WHERE id_contacto=?";
+
+PreparedStatement prest = con.prepareStatement(Ssql);
+
+prest.setString(1, name);
+prest.setString(2, surname);
+prest.setString(3, email);
+prest.setString(4, address);
+prest.setString(5, password);
+prest.setLong(6, telephone);
+
+
+if(prest.executeUpdate() > 0){
+
+  JOptionPane.showMessageDialog(null, "Los datos han sido modificados con éxito", "Operación Exitosa", 
+                                JOptionPane.INFORMATION_MESSAGE);
+  
+}else{
+
+  JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                + "Inténtelo nuevamente.", "Error en la operación", 
+                                JOptionPane.ERROR_MESSAGE);
+
+}
+
+} catch (SQLException e) {
+
+JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                + "Inténtelo nuevamente.\n"
+                                + "Error: "+e, "Error en la operación", 
+                                JOptionPane.ERROR_MESSAGE);
+
+}
+}
+ 
+}
+
+
+
+
+
+
+	
 }

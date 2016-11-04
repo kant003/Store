@@ -1,3 +1,5 @@
+
+
 package com.cebem.controller;
 
 import java.sql.PreparedStatement;
@@ -5,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import com.cebem.model.Provider;
 
@@ -71,13 +75,14 @@ public class ProviderManagement extends DBManagement {
 	}
 
 	public Provider getSingleProvider(int id) throws SQLException {
-		Provider p = new Provider();
-		try {
+		Provider p = null;
+		
 			String query = "SELECT * FROM Provider WHERE id = ?";
 			PreparedStatement pstm = con.prepareStatement(query);
 			ResultSet rs = pstm.executeQuery();
 
 			while (rs.next()) {
+				p = new Provider();
 				/*
 				 * Retrieve one client details and store it in provider object
 				 */
@@ -88,11 +93,7 @@ public class ProviderManagement extends DBManagement {
 				p.setPhone(rs.getLong(5));
 
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new SQLException();
-		}
+		
 		return p;
 	}
 
@@ -145,7 +146,7 @@ public class ProviderManagement extends DBManagement {
 
 	public ArrayList<Provider> findProviderDB(String param) {
 		// The array for return the providers
-		ArrayList<Provider> arrPro = null;
+		ArrayList<Provider> arrPro = new ArrayList<Provider>();
 		PreparedStatement pstm = null;
 		ResultSet result = null;
 
@@ -174,4 +175,63 @@ public class ProviderManagement extends DBManagement {
 
 		return arrPro;
 	}
+public void Actualizar(int id){
+		
+		
+		
+	
+	String name = null; // Nombre del proveedor
+	String address = null; // Direccion del proveedor
+	String email = null; // Email del proveedor
+	long phone = 0; // Telefono del proveedor
+
+
+int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar los datos actuales?");
+
+if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+try {
+
+
+	getSingleProvider(id);
+String Ssql = "UPDATE contacto SET name=?, address=?, email=?,phone=? "
+          + "WHERE id_contacto=?";
+
+PreparedStatement prest = con.prepareStatement(Ssql);
+
+prest.setString(1, name);
+prest.setString(2, address);
+prest.setString(3, email);
+prest.setLong(4,phone);
+
+
+if(prest.executeUpdate() > 0){
+
+  JOptionPane.showMessageDialog(null, "Los datos han sido modificados con éxito", "Operación Exitosa", 
+                                JOptionPane.INFORMATION_MESSAGE);
+  
+}else{
+
+  JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                + "Inténtelo nuevamente.", "Error en la operación", 
+                                JOptionPane.ERROR_MESSAGE);
+
+}
+
+} catch (SQLException e) {
+
+JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                + "Inténtelo nuevamente.\n"
+                                + "Error: "+e, "Error en la operación", 
+                                JOptionPane.ERROR_MESSAGE);
+
+}
+}
+ 
+}
+
+
+
 }
