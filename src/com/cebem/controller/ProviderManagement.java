@@ -1,3 +1,5 @@
+
+
 package com.cebem.controller;
 
 import java.sql.PreparedStatement;
@@ -49,16 +51,16 @@ public class ProviderManagement extends DBManagement {
 
 	public Provider getSingleProvider(int id) throws SQLException {
 		Provider p = null;
-		try {
+		
 			String query = "SELECT * FROM Provider WHERE id = ?";
 			PreparedStatement pstm = con.prepareStatement(query);
 			ResultSet rs = pstm.executeQuery();
 
 			while (rs.next()) {
+				p = new Provider();
 				/*
 				 * Retrieve one client details and store it in provider object
 				 */
-				p=new Provider();
 				p.setId(rs.getInt(1));
 				p.setName(rs.getString(2));
 				p.setAddress(rs.getString(3));
@@ -66,11 +68,7 @@ public class ProviderManagement extends DBManagement {
 				p.setPhone(rs.getLong(5));
 
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new SQLException();
-		}
+		
 		return p;
 	}
 
@@ -152,4 +150,5 @@ public class ProviderManagement extends DBManagement {
 
 		return arrPro;
 	}
+
 }

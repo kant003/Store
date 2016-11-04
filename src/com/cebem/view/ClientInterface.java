@@ -1,5 +1,11 @@
 package com.cebem.view;
 
+/*
+ * 
+ * Clase que genera la GUI para la gestión de Clientes
+ * 
+ * */
+
 import java.awt.BorderLayout;	
 import java.awt.CardLayout;
 import java.awt.EventQueue;
@@ -26,9 +32,13 @@ import javax.swing.JTextField;
 
 import com.cebem.controller.ClientManagement;
 import com.cebem.model.Client;
+import java.awt.Color;
+import java.awt.Toolkit;
+
 
 public class ClientInterface {
 
+	// VARIABLES
 	private static JFrame frame;
 	private JTable table;
 	private JTextField txtId;
@@ -41,7 +51,9 @@ public class ClientInterface {
 	private JPasswordField txtPass;
 
 	/**
-	 * Launch the application.
+	 * Lanza la aplicación
+	 * 
+	 * @param args String[] default
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,17 +70,20 @@ public class ClientInterface {
 	}
 
 	/**
-	 * Create the application.
+	 * Crea la aplicación
+	 * 
 	 */
 	public ClientInterface() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa el contenido del Frame
+	 * 
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClientInterface.class.getResource("/com/cebem/view/iconojefolla.png")));
 		frame.setBounds(100, 100, 600, 300);
 		frame.setMinimumSize(frame.getSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +98,7 @@ public class ClientInterface {
 		panelTitleClientList.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblClientList = new JLabel("Listado de clientes");
+		lblClientList.setForeground(Color.MAGENTA);
 		lblClientList.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panelTitleClientList.add(lblClientList, BorderLayout.WEST);
 		

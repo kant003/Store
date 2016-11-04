@@ -1,14 +1,22 @@
 package com.cebem.model;
 
+/*
+ * 
+ * Clase que define el modelo de Producto (Product)
+ * 
+ * */
+
 public class Product {
+	
+	// ATRIBUTOS
+	int id; // Id del Producto
+	String name; // Nombre del Producto
+	int ref; // Referencia del Producto
+	double price; // Precio del Producto
+	int idProvider; // Id del Proveedor del Producto 
+	int stock; // Cantidad en stock del Producto
 
-	int id;
-	String name;
-	int ref;
-	double price;
-	int idProvider;
-	int stock;
-
+	// CONSTRUCTOR
 	public Product(int id, String name, int ref, double price, int idProvider, int stock) {
 		super();
 		this.id = id;
@@ -19,6 +27,7 @@ public class Product {
 		this.stock = stock;
 	}
 
+	// GETTERS & SETTERS
 	public Product() {
 		super();
 	}
@@ -71,6 +80,7 @@ public class Product {
 		this.stock = stock;
 	}
 
+	// TOSTRING
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
