@@ -140,7 +140,7 @@ public class ClientManagement extends DBManagement {
  * que nos recoge los clientes con algún parámetro coincidente(excluyendo id y password)
  */
 	public ArrayList<Client> findClientsDB(String param) {
-		ArrayList<Client> arrCli=null;
+		ArrayList<Client> arrCli=new ArrayList<Client>();
 		PreparedStatement pstm=null;
 		ResultSet result=null;
 
