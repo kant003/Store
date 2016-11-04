@@ -123,7 +123,7 @@ public class ProviderManagement extends DBManagement {
 
 	public ArrayList<Provider> findProviderDB(String param) {
 		// The array for return the providers
-		ArrayList<Provider> arrPro = null;
+		ArrayList<Provider> arrPro = new ArrayList<Provider>();
 		PreparedStatement pstm = null;
 		ResultSet result = null;
 
