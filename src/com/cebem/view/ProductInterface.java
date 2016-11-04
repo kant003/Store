@@ -60,7 +60,7 @@ public class ProductInterface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ProductInterface.class.getResource("/com/cebem/view/icon.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ProductInterface.class.getResource("/com/cebem/view/iconojefolla.png")));
 		frame.setBounds(100, 100, 624, 364);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));

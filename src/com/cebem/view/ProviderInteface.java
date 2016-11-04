@@ -61,7 +61,7 @@ public class ProviderInteface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ProviderInteface.class.getResource("/com/cebem/view/icon.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ProviderInteface.class.getResource("/com/cebem/view/iconojefolla.png")));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));

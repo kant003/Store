@@ -32,6 +32,8 @@ import javax.swing.JTextField;
 
 import com.cebem.controller.ClientManagement;
 import com.cebem.model.Client;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 
 public class ClientInterface {
@@ -81,6 +83,7 @@ public class ClientInterface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClientInterface.class.getResource("/com/cebem/view/iconojefolla.png")));
 		frame.setBounds(100, 100, 600, 300);
 		frame.setMinimumSize(frame.getSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,6 +98,7 @@ public class ClientInterface {
 		panelTitleClientList.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblClientList = new JLabel("Listado de clientes");
+		lblClientList.setForeground(Color.MAGENTA);
 		lblClientList.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panelTitleClientList.add(lblClientList, BorderLayout.WEST);
 		
