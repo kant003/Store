@@ -14,8 +14,31 @@ import com.cebem.model.Provider;
 
 public class ProviderManagement extends DBManagement {
 
+<<<<<<< HEAD
+	public boolean updateProvider(int id, Provider provider){
+		String query = "UPDATE product SET name=?, address=?, email=? WHERE Id=?;";
+
+		PreparedStatement ps;
+		try {
+			ps= (PreparedStatement)con.prepareStatement(query);
+
+			ps.setString(1 , provider.getName());
+			ps.setString(2, provider.getAddress());
+			ps.setString(3, provider.getEmail());
+			ps.setInt(4, id);
+			ps.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public void selectSingleDB(int id) {
+=======
 	// Method for adding providers to the DB
 	public static int addProvider(Provider p) throws ClassNotFoundException {
+>>>>>>> 73147bbac153d03fa67e7d40f20773971a1f4241
 
 		try {
 			// We create the sentence
@@ -123,7 +146,7 @@ public class ProviderManagement extends DBManagement {
 
 	public ArrayList<Provider> findProviderDB(String param) {
 		// The array for return the providers
-		ArrayList<Provider> arrPro = null;
+		ArrayList<Provider> arrPro = new ArrayList<Provider>();
 		PreparedStatement pstm = null;
 		ResultSet result = null;
 

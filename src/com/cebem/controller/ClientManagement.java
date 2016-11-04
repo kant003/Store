@@ -15,6 +15,32 @@ import com.cebem.model.Client;
 
 public class ClientManagement extends DBManagement {
 
+<<<<<<< HEAD
+	/* method update client in the DB */
+	public boolean updateClient(int id, Client client){
+		String query = "UPDATE client SET name=?, surname=?, telephone=?, email=?, address=?, password=?WHERE Id=?;";
+
+		PreparedStatement ps;
+		try {
+			ps= (PreparedStatement)con.prepareStatement(query);
+
+			ps.setString(1 , client.getName());
+			ps.setString(2, client.getSurname());
+			ps.setLong(3, client.getTelephone());
+			ps.setString(4, client.getEmail());
+			ps.setString(5, client.getAddress());
+			ps.setString(6, client.getPassword());
+			ps.setInt(7, id);
+			ps.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	// Method for adding clients to the DB
+=======
 
 	/**
 	 * Añade un Cliente a la BD
@@ -23,6 +49,7 @@ public class ClientManagement extends DBManagement {
 	 * @return 0
 	 * @throws ClassNotFoundException
 	 */
+>>>>>>> 73147bbac153d03fa67e7d40f20773971a1f4241
 	public static int addClient(Client c) throws ClassNotFoundException {
 
 		try {
