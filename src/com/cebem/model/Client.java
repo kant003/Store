@@ -1,20 +1,23 @@
 package com.cebem.model;
 
+/*
+ * 
+ * Clase que define el modelo de Cliente (Client)
+ * 
+ * */
+
 public class Client {
-	int id;
-	String name;
-	String surname;
-	long telephone;
-	String email;
-	String address;
-	String password;
+	
+	// VARIABLES
+	int id; // Id del Cliente
+	String name; // Nombre del Cliente
+	String surname; // Apellidos del Cliente
+	String email; // Email del Cliente
+	String address; // Dirección del Cliente
+	String password; // Password del Cliente
+	long telephone; // Teléfono del Cliente
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-
+	// CONSTRUCTOR
 	public Client(int id, String name, String surname, long telephone, String email, String address, String password) {
 		super();
 		this.id = id;
@@ -26,6 +29,7 @@ public class Client {
 		this.password = password;
 	}
 
+	// GETTERS & SETTERS
 	public Client() {
 		super();
 	}
@@ -86,4 +90,10 @@ public class Client {
 		this.password = password;
 	}
 
+	// TOSTRING
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
 }

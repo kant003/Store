@@ -20,6 +20,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class ProviderInteface {
 
@@ -59,6 +61,7 @@ public class ProviderInteface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ProviderInteface.class.getResource("/com/cebem/view/iconojefolla.png")));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
@@ -90,6 +93,7 @@ public class ProviderInteface {
 		panel_3.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		JLabel lblNewLabel = new JLabel("Listado de Proveedores");
+		lblNewLabel.setForeground(Color.MAGENTA);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_3.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));

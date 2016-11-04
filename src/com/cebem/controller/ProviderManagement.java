@@ -1,39 +1,82 @@
+
+
 package com.cebem.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
-import com.cebem.model.Product;
+import javax.swing.JOptionPane;
+
 import com.cebem.model.Provider;
 
 public class ProviderManagement extends DBManagement {
 
-	public void getSingleProvider(int id) {
+	// Method for adding providers to the DB
+	public static int addProvider(Provider p) throws ClassNotFoundException {
 
-		ArrayList<Provider> arrayProviders = new ArrayList<Provider>();
+		try {
+			// We create the sentence
+			String sql = "INSERT INTO Provider VALUES (?, ?, ?, ?, ?)";
 
-		for (Provider pv : arrayProviders) {
+			// We create the PreparedStatement
+			PreparedStatement pstm = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-			if (pv.equals(id)) {
+			// We insert the data received from the provider into the prepared
+			// statement
+			// pstm.setInt(1, c.getId()); Id is set to auto_increment in the DB
+			pstm.setInt(1, p.getId());
+			pstm.setString(2, p.getName());
+			pstm.setString(3, p.getAddress());
+			pstm.setString(4, p.getEmail());
+			pstm.setLong(5, p.getPhone());
 
-				System.out.println(pv); // Esto deberia ir en la interfaz
-				// guiProvider
+			// Execute the sentence
+			pstm.executeUpdate();
 
-				pv.setId(rs.getInt(1));
-				pv.setName(rs.getString(2));
-				pv.setAddress(rs.getString(3));
-				pv.setEmail(rs.getString(4));
-
+			ResultSet rs = pstm.getGeneratedKeys();
+			if (rs != null && rs.next()) {
+				long llave = rs.getLong(1);
+				return (int) llave;
 			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return pv;
+
+		return 0;
 	}
 
-	public static ArrayList<Provider> getProviders() {
-		ArrayList<Product> providers = new ArrayList<Product>();
+	public Provider getSingleProvider(int id) throws SQLException {
+		Provider p = null;
+		
+			String query = "SELECT * FROM Provider WHERE id = ?";
+			PreparedStatement pstm = con.prepareStatement(query);
+			ResultSet rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				p = new Provider();
+				/*
+				 * Retrieve one client details and store it in provider object
+				 */
+				p.setId(rs.getInt(1));
+				p.setName(rs.getString(2));
+				p.setAddress(rs.getString(3));
+				p.setEmail(rs.getString(4));
+				p.setPhone(rs.getLong(5));
+
+			}
+		
+		return p;
+	}
+
+	// Method for getting the providers from the DB
+	public static ArrayList<Provider> getProvider() {
+		ArrayList<Provider> providers = new ArrayList<Provider>();
 
 		String query = "SELECT * FROM Provider";
 		ResultSet rs = null;
@@ -43,16 +86,18 @@ public class ProviderManagement extends DBManagement {
 			rs = statement.executeQuery(query);
 
 			while (rs.next()) {
-				Provider pv = new Provider();
+				Provider p = new Provider();
 				/*
-				 * Retrieve one client details and store it in client object
+				 * Retrieve one providers details and store it in provider
+				 * object
 				 */
-
-				pv.setId(rs.getInt(1));
-				pv.setName(rs.getString(2));
-				pv.setAddress(rs.getString(3));
-				pv.setEmail(rs.getString(4));
-				Provider.add(pv);
+				p.setId(rs.getInt(1));
+				p.setName(rs.getString(2));
+				p.setAddress(rs.getString(3));
+				p.setEmail(rs.getString(4));
+				p.setPhone(rs.getLong(5));
+				// add each client to the list
+				providers.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -61,4 +106,109 @@ public class ProviderManagement extends DBManagement {
 		}
 		return providers;
 	}
+
+	
+	// Method for deleting a provider
+	public static void deleteProvider(int id) {
+		PreparedStatement st = null;
+		try {
+			st = con.prepareStatement("DELETE FROM Provider WHERE id = ?");
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<Provider> findProviderDB(String param) {
+		// The array for return the providers
+		ArrayList<Provider> arrPro = null;
+		PreparedStatement pstm = null;
+		ResultSet result = null;
+
+		try {
+			String query = "SELECT Provider.id,name,Address,email" + " FROM Provider WHERE Provider.name like '%"
+					+ param + "%' Or Provider.email like '%" + param + "%' Or Provider.address like '%" + param + "%' Or Provider.phone like" + param+"%';";
+
+			pstm = con.prepareStatement(query);
+			result = pstm.executeQuery();
+
+			// saving the results on arrPro
+			while (result.next()) {
+				Provider p = new Provider();
+				p.setId(result.getInt(1));
+				p.setName(result.getString(2));
+				p.setAddress(result.getString(3));
+				p.setEmail(result.getString(4));
+				p.setPhone(result.getLong(5));
+
+				arrPro.add(p);
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return arrPro;
+	}
+public void Actualizar(int id){
+		
+		
+		
+	
+	String name = null; // Nombre del proveedor
+	String address = null; // Direccion del proveedor
+	String email = null; // Email del proveedor
+	long phone = 0; // Telefono del proveedor
+
+
+int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar los datos actuales?");
+
+if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+try {
+
+
+	getSingleProvider(id);
+String Ssql = "UPDATE contacto SET name=?, address=?, email=?,phone=? "
+          + "WHERE id_contacto=?";
+
+PreparedStatement prest = con.prepareStatement(Ssql);
+
+prest.setString(1, name);
+prest.setString(2, address);
+prest.setString(3, email);
+prest.setLong(4,phone);
+
+
+if(prest.executeUpdate() > 0){
+
+  JOptionPane.showMessageDialog(null, "Los datos han sido modificados con éxito", "Operación Exitosa", 
+                                JOptionPane.INFORMATION_MESSAGE);
+  
+}else{
+
+  JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                + "Inténtelo nuevamente.", "Error en la operación", 
+                                JOptionPane.ERROR_MESSAGE);
+
+}
+
+} catch (SQLException e) {
+
+JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                + "Inténtelo nuevamente.\n"
+                                + "Error: "+e, "Error en la operación", 
+                                JOptionPane.ERROR_MESSAGE);
+
+}
+}
+ 
+}
+
+
+
 }

@@ -2,6 +2,7 @@ package com.cebem.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TimeZone;
@@ -67,4 +68,46 @@ public class ProductManagement extends DBManagement {
 		}
 		return products;
 	}
+	public void UpdateProductoDB(int id){
+
+		
+		String name;
+		int ref;
+		double price;
+		int idProvider;
+	 id_actualizar=getSingleProduct(id);
+	String sSQL = "UPDATE producto " +
+            "SET name = ?," +
+            "ref = ?," +
+            "price= ?," +
+           "idProvider = ?" +
+            "WHERE id = "+id;
+String  mensaje = "Los datos se han Modoficado de Manera Satisfactoria...";
+
+try
+{
+    PreparedStatement pst = con.prepareStatement(sSQL);// con esta sentencia se insertan los datos en la base de datos
+//    pst.setString(1, Id);
+    pst.setString(1, name);
+    pst.setInt(2,ref);
+    pst.setDouble(3, price);
+    pst.setInt(4, idProvider);
+    int n = pst.executeUpdate();//valida si se guardaron los datos; si pst>0 entonces se guardaron
+    
+}
+
+
+
+if(n > 0)
+{
+JOptionPane.showMessageDialog(null, mensaje);
+CargarTabla("");//l momento de agregar un nuevo registro, actualiza la tabla
+}
+}
+catch (SQLException ex)
+{
+JOptionPane.showMessageDialog(null, ex);
+}
+
+}
 }
